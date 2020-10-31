@@ -1,0 +1,10 @@
+.sq {
+    display: inline-block;
+    min-height: 50px;
+    min-width: 50px;
+}
+
+img {
+    min-height: 50px;
+    min-width: 50px;
+}

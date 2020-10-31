@@ -11,15 +11,16 @@ import ColorNav from './components/navbar/ColorNav';
 
 import Login from './components/login/Login';
 import Register from './components/register/Register';
+import Home from './components/home/Home';
 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       navActive: true,
-      colorValue: 'dark',
+      theme: 'dark',
       force: true
     };
 
@@ -31,11 +32,7 @@ class App extends React.Component {
   }
 
   changeColor = (colorVal) => {
-    this.setState({colorValue: colorVal});
-  }
-
-  forceUpdate = () => {
-    this.setState({force: !this.state.force});
+    this.setState({theme: colorVal});
   }
 
   render() {
@@ -45,11 +42,11 @@ class App extends React.Component {
           <Switch>
             <Route path='/home'>
               <Navbar {...this.state}/>
-              <Container className={"content " + ((this.state.navActive) ? "inactive" : "active") + " " + this.state.colorValue}>
+              <Container className={"content " + ((this.state.navActive) ? "inactive" : "active") + " " + this.state.theme}>
                 <NavButton changeNav={this.changeNav} />
-                <Home />
+                <Home theme={this.state.theme}/>
               </Container>
-              <ColorNav changeColor={this.changeColor} colorValue={this.state.colorValue} />
+              <ColorNav changeColor={this.changeColor} theme={this.state.theme} />
             </Route>
             <Route path='/register'>
               <Register />
@@ -65,10 +62,6 @@ class App extends React.Component {
       </div>
     );
   }
-}
-
-function Home() {
-  return <h1>Home</h1>
 }
 
 export default App;

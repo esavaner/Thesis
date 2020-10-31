@@ -19,7 +19,7 @@ function Field(props) {
 class Navbar extends React.Component {
     render() {
         return (
-            <div className={"nav " + ((this.props.navActive) ? "activeNav" : "inactiveNav") + " " + this.props.colorValue + "2"}>
+            <div className={"nav " + ((this.props.navActive) ? "activeNav" : "inactiveNav") + " " + this.props.theme + "2"}>
                 <Link to="/">Home</Link>
                 <Link to="/repos">Repos</Link>
                 <Field/>

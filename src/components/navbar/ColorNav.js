@@ -19,7 +19,7 @@ class ColorNav extends React.Component {
 
     render() {
         return (
-            <div className={"clr " + ((this.state.colorActive) ? "activeColor" : "inactiveColor") + " " + this.props.colorValue + "2"}>
+            <div className={"clr " + ((this.state.colorActive) ? "activeColor" : "inactiveColor") + " " + this.props.theme + "2"}>
                 <button className="clrButton" onClick={this.changeCol} value="dark">Dark</button>
                 <button className="clrButton" onClick={this.changeCol} value="light">Light</button>
                 <button className="clrButton" onClick={this.changeCol} value="blue">Blue</button>
