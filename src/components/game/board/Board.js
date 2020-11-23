@@ -19,15 +19,17 @@ class Board extends React.Component {
         for(let i = 0; i < 8; i++) {
             let row = [];
             for(let j = 0; j < 8; j++) {
-                let color = (i%2===0 && j%2===0) || (i%2!==0 && j%2!==0)? "4" : "5";
+                let color = (i%2===0 && j%2===0) || (i%2!==0 && j%2!==0)? "L" : "D";
                 row.push(<Square theme={this.props.theme} num={color} key={j} update={this.update} 
-                    piece={figures[this.props.grid[i][j]]} val={letters[i] + (j+1)}/>);
+                    piece={figures[this.props.grid[i][j]]} val={letters[i] + (j+1)} picked={this.props.picked}/>);
             }
-            board.push(
-                <div key={i}>
-                    {row}
-                </div>
-            );
+            if (this.props.color === 'white')
+                board.push(<div key={i}>{row}</div>);
+            else if (this.props.color === 'black')
+                board.push(<div key={i}>{row.reverse()}</div>);
+        }
+        if (this.props.color === 'black') {
+            board = board.reverse()
         }
         return (
             <div>

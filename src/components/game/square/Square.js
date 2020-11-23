@@ -11,8 +11,9 @@ class Square extends React.Component {
     }
 
     render() {
+        let col = this.props.picked === this.props.val ? "P" : this.props.num;
         return (
-            <div className={'sq ' + this.props.theme + this.props.num} onClick={this.update}>
+            <div className={'sq ' + this.props.theme + col} onClick={this.update}>
                 <img src={this.props.piece} alt={this.props.val}></img>
             </div>
         );

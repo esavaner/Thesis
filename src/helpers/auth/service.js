@@ -29,7 +29,7 @@ function logout() {
 }
 
 function getUser() {
-    return JSON.parse(localStorage.getItem('user'));
+    return localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {username: ''};
 }
  
 export default {
