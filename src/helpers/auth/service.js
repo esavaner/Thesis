@@ -32,7 +32,7 @@ function getUser() {
     return localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {username: ''};
 }
  
-export default {
+export {
     register,
     login,
     logout,

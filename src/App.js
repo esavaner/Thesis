@@ -15,8 +15,6 @@ import Home from './components/home/Home';
 
 import { Container } from 'react-bootstrap';
 
-import socket from './helpers/sockets';
-
 class App extends React.Component {
   constructor(props) {
     super(props);

@@ -13,6 +13,4 @@ async function create() {
 }
 
  
-export default {
-    create
-}
+export default create;
