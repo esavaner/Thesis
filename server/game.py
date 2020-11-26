@@ -14,11 +14,14 @@ class Game:
         self.p2 = None
         self.started = False
         self.finished = False
+        self.turn = 'white'
 
     def makeMove(self, move):
         m = chess.Move.from_uci(str(move))
         self.board.push(m)
         self.moves.append(m)
+        self.turn = 'black' if self.turn == 'white' else 'white'
+        return self.board
 
     def addPlayer(self, user):
         u = None
@@ -28,3 +31,15 @@ class Game:
             self.p2 = u = Player(user, 'black')
             self.started = True
         return u
+
+    def getBoard(self):
+        return str(self.board).replace('↵', '\n')
+
+    def isFinished(self):
+        return self.board.is_game_over()
+
+    def isStalemate(self):
+        return self.board.is_stalemate()
+
+    def isInsufficient(self):
+        return self.board.is_insufficient_material()

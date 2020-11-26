@@ -9,6 +9,6 @@ function getUsers() {
     return fetch(`${API_URL}/users`, options);
 }
 
-export default {
+export {
     getUsers
 }

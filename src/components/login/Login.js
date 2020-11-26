@@ -5,7 +5,7 @@ import history from '../../helpers/history';
 
 import './Login.css';
 import '../../globalColors.css';
-import service from '../../helpers/auth/service';
+import { login, getUser } from '../../helpers/auth/service';
 
 class Login extends React.Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class Login extends React.Component {
     }
 
     checkUser = () => {
-        let user = service.getUser();
+        let user = getUser();
         if (user)
             return true
         return false
@@ -31,7 +31,7 @@ class Login extends React.Component {
 
     handleLogin = (e) => {
         e.preventDefault();
-        service.login(this.state).then(
+        login(this.state).then(
             (data) => {
                 history.push('/');
             },

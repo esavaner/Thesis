@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Service from '../../helpers/auth/service';
+import { getUser } from '../../helpers/auth/service';
 
 import './Navbar.css';
 import '../../globalColors.css';
@@ -9,7 +9,7 @@ import UserField from './UserField'
 import LoginField from './LoginField'
 
 function Field(props) {
-    let user = Service.getUser();
+    let user = getUser();
     if (user) 
         return <UserField/>
 

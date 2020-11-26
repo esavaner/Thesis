@@ -1,0 +1,11 @@
+.main_id {
+    font-size: 50px;
+    color: white;
+    letter-spacing: 10px;
+}
+
+.main_url {
+    font-size: 20px;
+    color: black;
+    background-color: white;
+}

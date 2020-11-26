@@ -97,16 +97,16 @@ def handleMove(data):
     print(data, 'move')
     room = data['room']
     game = rooms[str(room)]
-    game.makeMove()
-    if game.is_finished():
+    game.makeMove(data['from'] + data['to'] + data['promo'])
+    if game.isFinished():
         emit('finished', {}, room=room)
-    elif game.is_stalemate():
+    elif game.isStalemate():
         emit('stalemate', {}, room=room)
-    elif game.is_insufficient():
+    elif game.isInsufficient():
         emit('insufficient', {}, room=room)
     else:
-        emit('moved', {board: game.}, room=room)
+        emit('moved', {'board': game.getBoard(), 'turn': game.turn }, room=room)
 
 
 if __name__ == "__main__":
-    socketio.run(app)
+    socketio.run(app) 

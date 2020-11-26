@@ -26,3 +26,5 @@ yarn-error.log*
 server/__pycache__
 server/base.db
 public
+
+.vscode

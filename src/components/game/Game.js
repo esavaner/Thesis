@@ -5,7 +5,7 @@ import '../../globalColors.css';
 import Board from './board/Board';
 
 import socket from '../../helpers/sockets';
-import service from '../../helpers/auth/service';
+import { getUser } from '../../helpers/auth/service';
 
 class GameWithParams extends React.Component {
 
@@ -28,7 +28,8 @@ class GameWithParams extends React.Component {
             started: false,
             finished: false,
             color: null,
-            user: service.getUser()
+            turn: 'white',
+            user: getUser()
         }
         this.update = this.update.bind(this);
     }
@@ -40,20 +41,11 @@ class GameWithParams extends React.Component {
                     picked: e.target.alt
                 })
             } else {
-                socket.emit('move', {from: e.target.alt, to:this.state.picked})
+                if (this.state.turn === this.state.color)
+                    socket.emit('move', {room: this.props.room, from: this.state.picked, to: e.target.alt, promo: ''})
                 console.log(e.target.alt + ' ' + this.state.picked);
                 this.setState({
-                    picked: null,
-                    grid: [
-                        ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
-                        ['.', '.', '.', '.', '.', '.', '.', '.'],
-                        ['.', '.', '.', '.', '.', '.', '.', '.'],
-                        ['.', '.', '.', '.', '.', '.', '.', '.'],
-                        ['.', '.', '.', '.', '.', '.', '.', '.'],
-                        ['.', '.', '.', '.', '.', '.', '.', '.'],
-                        ['.', '.', '.', '.', '.', '.', '.', 'R'],
-                        ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
-                    ]
+                    picked: null
                 })
             }
         }
@@ -67,13 +59,31 @@ class GameWithParams extends React.Component {
                 this.setState({color: resp.color})
             }
         });
-        socket.on('message', (data) => {
-            console.log(data);
+        socket.on('left', (resp) => {
+            console.log(resp, 'left');
         });
-        socket.on('start', () => {
+        socket.on('moved', (resp) => {
+            console.log(resp, 'moved');
+            let board = resp.board.split(/\n/g).map(r => r.split(/ /g));
+            console.log(board)
+            this.setState({ grid: board, turn: resp.turn});
+        });
+        socket.on('message', (resp) => {
+            console.log(resp, 'message');
+        });
+        socket.on('start', (resp) => {
             console.log('Started');
             this.setState({started: true})
-        })
+        });
+        socket.on('finished', (resp) => {
+            console.log(resp, 'finished');
+        });
+        socket.on('stalemate', (resp) => {
+            console.log(resp, 'stalemate');
+        });
+        socket.on('insufficient', (resp) => {
+            console.log(resp, 'insufficient');
+        });
     }
 
     render() {

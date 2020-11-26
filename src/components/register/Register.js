@@ -5,7 +5,7 @@ import history from '../../helpers/history';
 
 import './Register.css';
 import '../../globalColors.css';
-import Service from '../../helpers/auth/service';
+import { register } from '../../helpers/auth/service';
 
 class Register extends React.Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class Register extends React.Component {
             return;
         }
         e.preventDefault();
-        Service.register({username: this.state.username, email: this.state.email, password: this.state.password}).then(
+        register({username: this.state.username, email: this.state.email, password: this.state.password}).then(
             (data) => {
                 history.push('/login');
             },

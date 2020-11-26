@@ -21,7 +21,7 @@ class Board extends React.Component {
             for(let j = 0; j < 8; j++) {
                 let color = (i%2===0 && j%2===0) || (i%2!==0 && j%2!==0)? "L" : "D";
                 row.push(<Square theme={this.props.theme} num={color} key={j} update={this.update} 
-                    piece={figures[this.props.grid[i][j]]} val={letters[i] + (j+1)} picked={this.props.picked}/>);
+                    piece={figures[this.props.grid[i][j]]} val={letters[j] + (8 - i)} picked={this.props.picked}/>);
             }
             if (this.props.color === 'white')
                 board.push(<div key={i}>{row}</div>);

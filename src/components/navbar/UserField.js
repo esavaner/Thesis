@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './UserField.css';
 
-import Service from '../../helpers/auth/service';
+import { logout } from '../../helpers/auth/service';
 
 
 class UserField extends React.Component {
-    logout = () => {
-        Service.logout();
+    logoutUser = () => {
+        logout();
     }
     render() {
         return (
@@ -15,7 +15,7 @@ class UserField extends React.Component {
                 <span>Photo</span>
                 <span>Username</span>
                 <button>Profile</button>
-                <Link to='/login'><button onClick={this.logout}>Logout</button></Link>
+                <Link to='/login'><button onClick={this.logoutUser}>Logout</button></Link>
             </div>
         )
     }
