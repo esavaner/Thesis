@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './UserField.css';
+import './Navbar.css';
 
 import { logout } from '../../helpers/auth/service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class UserField extends React.Component {
@@ -11,12 +13,14 @@ class UserField extends React.Component {
     }
     render() {
         return (
-            <div>
-                <span>Photo</span>
-                <span>Username</span>
-                <button>Profile</button>
-                <Link to='/login'><button onClick={this.logoutUser}>Logout</button></Link>
-            </div>
+            <Link to='/login' onClick={this.logoutUser}>
+                <div className='icon'>
+                    <FontAwesomeIcon icon='sign-out-alt'/>
+                </div>
+                <div className='txt'>
+                    Sign out
+                </div>
+            </Link>
         )
     }
 }

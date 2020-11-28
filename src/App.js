@@ -14,9 +14,9 @@ import Register from './components/register/Register';
 import Home from './components/home/Home';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faChessKing, faSignOutAlt, faCog, faMedal, faChessKnight, faChess } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHome);
+library.add(faHome, faChessKing, faSignOutAlt, faCog, faMedal, faChessKnight, faChess);
 
 class App extends React.Component {
   constructor(props) {
@@ -40,14 +40,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app">
+      <div className='app'>
         <Router history={history}>
           <Switch>
             <Route path='/h'>
-              <Navbar {...this.state}/>
-              <div className={"content " + ((this.state.navActive) ? "inactive" : "active") + " " + this.state.theme}>
-                <NavButton changeNav={this.changeNav} />
-                <Home theme={this.state.theme}/>
+              <div className={this.state.theme}>
+                <Navbar {...this.state}/>
+                <div className={"content " + ((this.state.navActive) ? "inactive" : "active") + " " + this.state.theme}>
+                  <NavButton changeNav={this.changeNav} />
+                  <Home theme={this.state.theme}/>
+                </div>
               </div>
             </Route>
             <Route path='/register'>

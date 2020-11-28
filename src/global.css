@@ -15,6 +15,11 @@
     background-color: #262729;     
     color: rgb(219, 219, 219); 
 }
+.darkH:hover {
+    background-color: #262729; 
+    color: white;
+    border-radius: 5px;
+}
 
 .darkL { background-color: #bdbdca; }
 .darkD { background-color: #4a4a50; }

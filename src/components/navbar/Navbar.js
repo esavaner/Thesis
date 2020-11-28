@@ -21,17 +21,52 @@ class Navbar extends React.Component {
     render() {
         return (
             <div className={'nav ' + ((this.props.navActive) ? 'activeNav' : 'inactiveNav') + ' ' + this.props.theme + '2'}>
-
-                <Link to='/'>
-                    <span>
-                        <FontAwesomeIcon icon='home'/>
-                    </span>
-                    Home
-                </Link>
-
-                
-                <Link to='/repos'>Repos</Link>
-                <Field/>
+                <div className='logo'>
+                    <FontAwesomeIcon icon='chess' size='3x'/>
+                </div>
+                <div className='tile'>
+                    <Link to='/'>
+                        <div className='icon'>
+                            <FontAwesomeIcon icon='home'/>
+                        </div>
+                        <div className='txt'>
+                            Home
+                        </div>
+                    </Link>
+                </div>
+                <div className='tile'>
+                    <Link to='/h/c'>
+                        <div className='icon'>
+                            <FontAwesomeIcon icon='chess-knight'/>
+                        </div>
+                        <div className='txt'>
+                            Play
+                        </div>
+                    </Link>
+                </div>
+                <div className='tile'>
+                    <Link to='/h/r'>
+                        <div className='icon'>
+                            <FontAwesomeIcon icon='medal' spin/>
+                        </div>
+                        <div className='txt'>
+                            Ranking
+                        </div>
+                    </Link>
+                </div>
+                <div className='tile'>
+                    <Link to='/h/s'>
+                        <div className='icon'>
+                            <FontAwesomeIcon icon='cog'/>
+                        </div>
+                        <div className='txt'>
+                            Settings
+                        </div>
+                    </Link>
+                </div>
+                <div className='tile'>
+                    <Field/>
+                </div>
             </div>
         );
     }
