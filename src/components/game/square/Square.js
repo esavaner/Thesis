@@ -2,7 +2,7 @@
 import React from 'react';
 
 import './Square.css';
-import '../../../globalColors.css';
+import '../../../global.css';
 
 class Square extends React.Component {
 

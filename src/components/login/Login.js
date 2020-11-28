@@ -4,7 +4,7 @@ import { Redirect, Link } from 'react-router-dom';
 import history from '../../helpers/history';
 
 import './Login.css';
-import '../../globalColors.css';
+import '../../global.css';
 import { login, getUser } from '../../helpers/auth/service';
 
 class Login extends React.Component {
@@ -18,7 +18,7 @@ class Login extends React.Component {
 
     checkUser = () => {
         let user = getUser();
-        if (user)
+        if (user && user.username)
             return true
         return false
     }
@@ -47,7 +47,7 @@ class Login extends React.Component {
                 {this.checkUser() &&
                     <Redirect to='/'></Redirect>
                 }
-                <Link to='/home'><button>X</button></Link>
+                <Link to='/h'><button>X</button></Link>
                 <div>
                     <form onSubmit={this.handleLogin}>
                         <div>

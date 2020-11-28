@@ -2,7 +2,7 @@
 import React from 'react';
 
 import './Board.css';
-import '../../../globalColors.css';
+import '../../../global.css';
 import Square from '../square/Square';
 
 import figures from '../figures/figures';
@@ -24,15 +24,15 @@ class Board extends React.Component {
                     piece={figures[this.props.grid[i][j]]} val={letters[j] + (8 - i)} picked={this.props.picked}/>);
             }
             if (this.props.color === 'white')
-                board.push(<div key={i}>{row}</div>);
+                board.push(<div className='row' key={i}>{row}</div>);
             else if (this.props.color === 'black')
-                board.push(<div key={i}>{row.reverse()}</div>);
+                board.push(<div className='row' key={i}>{row.reverse()}</div>);
         }
         if (this.props.color === 'black') {
             board = board.reverse()
         }
         return (
-            <div>
+            <div className='board'>
                 {board}
             </div>
         );

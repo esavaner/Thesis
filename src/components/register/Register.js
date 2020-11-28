@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import history from '../../helpers/history';
 
 import './Register.css';
-import '../../globalColors.css';
+import '../../global.css';
 import { register } from '../../helpers/auth/service';
 
 class Register extends React.Component {
@@ -43,7 +43,7 @@ class Register extends React.Component {
     render() {
         return (
             <div>
-                <Link to='/home'><button>X</button></Link>
+                <Link to='/h'><button>X</button></Link>
                 <div>
                     <form onSubmit={this.handleRegister}>
                         <div>

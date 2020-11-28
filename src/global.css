@@ -1,0 +1,40 @@
+.ct { text-align: center; }
+.mr { margin: 10px; } 
+.pd { padding: 10px; }
+
+
+.dark { 
+    background-color: #56585e;
+    color: rgb(196, 196, 196); 
+}
+.dark2 { 
+    background-color: #37383b;     
+    color: rgb(179, 179, 179); 
+}
+.dark3 { 
+    background-color: #262729;     
+    color: rgb(219, 219, 219); 
+}
+
+.darkL { background-color: #bdbdca; }
+.darkD { background-color: #4a4a50; }
+.darkP { background-color: #377e37; }
+
+
+
+.light { 
+    background-color: #f9fbff;
+    color: black;
+}
+.light2 { 
+    background-color: #bec0c4;
+    color: black;
+}
+.light3 { 
+    background-color: #525a6b;
+    color: black;
+}
+
+.lightL { background-color: #bec0c4; }
+.lightD { background-color: #525a6b; }
+.lightP { background-color: #377e37; }

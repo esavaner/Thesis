@@ -1,12 +1,11 @@
 import React from 'react';
 
 import './Room.css';
-import '../../globalColors.css';
+import '../../global.css';
 
 import { create } from '../../helpers/other';
 import API_URL from '../../config';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Button } from 'react-bootstrap';
 
 class Room extends React.Component {
     constructor(props) {
@@ -34,41 +33,50 @@ class Room extends React.Component {
 
     render() {
         return (
-            <Container>
-                <Row className={this.props.theme + '2'}>
-                    <Col className="my-auto mx-auto">
-                        <Row>
-                            <h2>Create new room</h2>
-                        </Row>
-                        <Row>
-                            <span>Share this code with your friend</span>
-                        </Row>
-                        <Row className="main_id">
-                            {this.state.room}
-                        </Row>
-                        <Row>
-                            Or send this link
-                        </Row>
-                        <Row className="main_url">
-                            {this.state.room &&
-                                <div> {`${API_URL}/home/game/${this.state.room}`}</div>
-                            }
-                        </Row>
-                        <Row>
-                            {this.state.error &&
-                                <Button variant="warning" className="btn-warning" onClick={this.retry}>Retry</Button>
-                            }
-                            {this.state.room &&
-                                <div>
-                                    <Link to={'/home/game/' + this.state.room}>
-                                        <Button variant="success" className="btn-success">Join room</Button>
-                                    </Link>
-                                </div>
-                            }
-                        </Row>
-                    </Col>
-                </Row>
-            </Container>
+            <div className={this.props.theme + '2 wrap'}>
+                <div className='head ct'>
+                    Creating new room
+                </div>
+                <div className='mr'>
+                    {!this.state.room && !this.state.error &&
+                        <div className='row'>
+                            <div className='loader'></div>
+                            <div className='fetch'>
+                                Fetching new room
+                            </div>
+                        </div>
+                    }
+                    {this.state.error &&
+                        <div>
+                            <div className='err'>
+                                Error occured while creating new room.
+                            </div>
+                            <button className='' onClick={this.retry}>Retry</button>
+                        </div>
+                    }
+                    {this.state.room &&
+                        <div>
+                            <div className='mr'>
+                                <span>Share this code with your friend</span>
+                            </div>
+                            <div className={this.props.theme + '3 ct pd id'}>
+                                {this.state.room}
+                            </div>
+                            <div className='mr'>
+                                Or send this link
+                            </div>
+                            <div className={this.props.theme + '3 ct pd url'}>
+                                <div> {`${API_URL}/h/g/${this.state.room}`}</div>
+                            </div>
+                            <div className='ct mr'>
+                                <Link to={'/h/g/' + this.state.room}>
+                                    <button className=''>Join room</button>
+                                </Link>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
         );
     }
 }

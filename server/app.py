@@ -9,6 +9,7 @@ import random
 import string
 
 app = Flask(__name__)
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///base.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'secret'
@@ -20,7 +21,6 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-CORS(app)
 rooms = {}
 
 @app.route('/login', methods=['POST'])

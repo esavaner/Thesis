@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Repos.css';
-import '../../globalColors.css';
+import '../../global.css';
 
 class Repos extends React.Component {
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import '../../globalColors.css';
+import '../../global.css';
 import Board from './board/Board';
 
 import socket from '../../helpers/sockets';

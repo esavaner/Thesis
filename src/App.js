@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
-import './globalColors.css';
+import './global.css';
 
 import history from './helpers/history';
 
@@ -13,7 +13,10 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import Home from './components/home/Home';
 
-import { Container } from 'react-bootstrap';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faHome);
 
 class App extends React.Component {
   constructor(props) {
@@ -40,13 +43,12 @@ class App extends React.Component {
       <div className="app">
         <Router history={history}>
           <Switch>
-            <Route path='/home'>
+            <Route path='/h'>
               <Navbar {...this.state}/>
-              <Container className={"content " + ((this.state.navActive) ? "inactive" : "active") + " " + this.state.theme}>
+              <div className={"content " + ((this.state.navActive) ? "inactive" : "active") + " " + this.state.theme}>
                 <NavButton changeNav={this.changeNav} />
                 <Home theme={this.state.theme}/>
-              </Container>
-              <ColorNav changeColor={this.changeColor} theme={this.state.theme} />
+              </div>
             </Route>
             <Route path='/register'>
               <Register />
@@ -55,7 +57,7 @@ class App extends React.Component {
               <Login />
             </Route>
             <Route path='/'>
-              <Redirect to='/home'></Redirect>
+              <Redirect to='/h'></Redirect>
             </Route>
           </Switch>
         </Router>
