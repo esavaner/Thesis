@@ -1,0 +1,246 @@
+.page {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(42, 53, 61);
+    color: rgb(213, 223, 230);
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page button {
+    background: transparent;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: inherit;
+    border: 2px solid rgb(213, 223, 230);
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 13px;
+    margin: 10px
+}
+
+.page button:hover {
+    color: rgb(36, 46, 53);
+    background: rgb(213, 223, 230);
+}
+
+.page a {
+    color: inherit;
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+.page label {
+    min-width: 230px;
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+.page input {
+    min-width: 180px;
+    background: transparent;
+    color: inherit;
+    font-size: 17px;
+    border: 1px solid rgb(213, 223, 230);
+    border-radius: 7px;
+    padding: 5px;
+}
+
+.page .ch {
+    font-size: 15px;
+}
+
+.container {
+    position: relative;
+    overflow: hidden;
+    width: 80%;
+    height: 70%;
+    background:  rgb(36, 46, 53);
+    border-radius: 10px;
+}
+
+.container-overlay {
+    position: absolute;
+    overflow: hidden;
+    transition: all 0.6s;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    z-index: 10;
+}
+
+.overlay {
+    position: relative;
+    transition: all 0.6s;
+    width: 100%;
+    height: 200%;
+    background-image: linear-gradient(to right, #2051aa, #981a1a);
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    transition: all 1s;
+    width: 100%;
+    height: 50%;
+}
+
+.first {
+    top: 0;
+    transform: translateY(0);
+}
+
+.second {
+    bottom: 0;
+    transform: translateY(20%);
+}
+
+.container-form {
+    position: absolute;
+    transition: all 0.6s;
+    width: 100%;
+    height: 50%;
+}
+
+.container-form form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.register {
+    bottom: 0;
+    z-index: 1;
+    opacity: 0;
+    /*background: linear-gradient(to top, rgb(73, 96, 131),rgb(25, 30, 39));*/
+}
+
+.login {
+    bottom: 0;
+    z-index: 2;
+    /*background: linear-gradient(to bottom,rgb(73, 96, 131),rgb(25, 30, 39));*/
+}
+
+.container.swap .login {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.container.swap .register {
+    transform: translateY(-100%);
+    opacity: 1;
+    z-index: 5;
+}
+
+.container.swap .container-overlay {
+    transform: translateY(100%);
+}
+
+.container.swap .overlay {
+    transform: translateY(-50%);
+}
+
+.container.swap .first {
+    transform: translateY(-20%);
+}
+
+.container.swap .second {
+    transform: translateY(0);
+}
+
+@media screen and (min-width: 1020px) {
+    .container {
+        width: 55%;
+        height: 50%;
+    }
+
+    .container-overlay {
+        width: 40%;
+        height: 100%;
+        top: 0;
+    }
+
+    .overlay {
+        width: 200%;
+        height: 100%;
+    }
+
+    .panel {
+        top: 0;
+        width: 50%;
+        height: 100%;
+    }
+
+    .first {
+        left: 0;
+        transform: translateX(0);
+    }
+    
+    .second {
+        right: 0;
+        transform: translateX(20%);
+    }
+    
+    .container-form {
+        top: 0;
+        width: 60%;
+        height: 100%;
+    }
+    
+    .register {
+        right: 0;
+        z-index: 1;
+        opacity: 0;
+        /*background: linear-gradient(to top, rgb(73, 96, 131),rgb(25, 30, 39));*/
+    }
+    
+    .login {
+        right: 0;
+        z-index: 2;
+        /*background: linear-gradient(to bottom,rgb(73, 96, 131),rgb(25, 30, 39));*/
+    }
+    
+    .container.swap .login {
+        transform: translateX(-65%);
+        opacity: 0;
+    }
+    
+    .container.swap .register {
+        transform: translateX(-65%);
+        opacity: 1;
+        z-index: 5;
+    }
+    
+    .container.swap .container-overlay {
+        transform: translateX(150%);
+    }
+    
+    .container.swap .overlay {
+        transform: translateX(-50%);
+    }
+    
+    .container.swap .first {
+        transform: translateX(-20%);
+    }
+    
+    .container.swap .second {
+        transform: translateX(0);
+    }
+}
+
+@media screen and (max-width: 1020px) {
+    .panel {
+        left: 0;
+    }
+
+    .container-form {
+        left: 0;
+    }
+}

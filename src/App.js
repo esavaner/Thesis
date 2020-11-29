@@ -10,13 +10,12 @@ import NavButton from './components/navbar/NavButton';
 import ColorNav from './components/navbar/ColorNav';
 
 import Login from './components/login/Login';
-import Register from './components/register/Register';
 import Home from './components/home/Home';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHome, faChessKing, faSignOutAlt, faCog, faMedal, faChessKnight, faChess } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faChessKing, faSignOutAlt, faCog, faMedal, faChessKnight, faChess, faChessBoard } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHome, faChessKing, faSignOutAlt, faCog, faMedal, faChessKnight, faChess);
+library.add(faHome, faChessKing, faSignOutAlt, faCog, faMedal, faChessKnight, faChess, faChessBoard);
 
 class App extends React.Component {
   constructor(props) {
@@ -53,7 +52,7 @@ class App extends React.Component {
               </div>
             </Route>
             <Route path='/register'>
-              <Register />
+              <Login />
             </Route>
             <Route path='/login'>
               <Login />

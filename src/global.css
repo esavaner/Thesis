@@ -7,18 +7,22 @@
     background-color: #56585e;
     color: rgb(196, 196, 196); 
 }
+.dark a:hover {
+    color: white;
+}
 .dark2 { 
     background-color: #37383b;     
     color: rgb(179, 179, 179); 
+}
+.dark2 a:hover {
+    color: white;
 }
 .dark3 { 
     background-color: #262729;     
     color: rgb(219, 219, 219); 
 }
-.darkH:hover {
-    background-color: #262729; 
+.dark3 a:hover {
     color: white;
-    border-radius: 5px;
 }
 
 .darkL { background-color: #bdbdca; }

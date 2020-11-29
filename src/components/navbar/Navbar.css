@@ -1,22 +1,21 @@
 
-a {
+.nav a {
     text-decoration: none;
     color: inherit;
     transition: all 0.2s linear;
-    background: linear-gradient(to right, rgba(0,209,177,1) 0%,rgba(39,143,198,1) 98%);
+    background: linear-gradient(to right, rgb(70, 83, 197),rgb(245, 33, 33));
     background-size:0px 3px;
     background-repeat: no-repeat;
     background-position: left 85%;
     padding-bottom: 7px;
 }
 
-a:hover {
+.nav a:hover {
     background-size:100% 3px;
 }
 
-a:visited {
+.nav a:visited {
     text-decoration: none;
-    color: inherit;
 }
 
 .icon {
@@ -28,10 +27,11 @@ a:visited {
     width: 15%;
     height: 100%;
     text-align: center;
+    padding-top: 3%;
 }
 
 .nav {
-    transition: all 0.5s;
+    transition: all 0.7s;
 }
 
 @media screen and (min-width: 650px) {

@@ -47,7 +47,7 @@ class Navbar extends React.Component {
                 <div className='tile'>
                     <Link to='/h/r'>
                         <div className='icon'>
-                            <FontAwesomeIcon icon='medal' spin/>
+                            <FontAwesomeIcon icon='medal'/>
                         </div>
                         <div className='txt'>
                             Ranking
