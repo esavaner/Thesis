@@ -10,20 +10,7 @@
 }
 
 .page button {
-    background: transparent;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: inherit;
-    border: 2px solid rgb(213, 223, 230);
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 13px;
     margin: 10px
-}
-
-.page button:hover {
-    color: rgb(36, 46, 53);
-    background: rgb(213, 223, 230);
 }
 
 .page a {
@@ -55,8 +42,11 @@
 .container {
     position: relative;
     overflow: hidden;
-    width: 80%;
-    height: 70%;
+    width: 95%;
+    height: 80%;
+    min-width: 300px;
+    max-width: 600px;
+    max-height: 800px;
     background:  rgb(36, 46, 53);
     border-radius: 10px;
 }
@@ -155,9 +145,17 @@
     transform: translateY(0);
 }
 
+
+@media screen and (min-width: 430px) {
+    .container {
+        height: 70%;
+    }
+}
+
 @media screen and (min-width: 1020px) {
     .container {
-        width: 55%;
+        max-width: 800px;
+        max-height: 450px;
         height: 50%;
     }
 

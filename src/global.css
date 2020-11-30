@@ -1,17 +1,33 @@
+button {
+    background: transparent;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: inherit;
+    border: 2px solid rgb(213, 223, 230);
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 13px;
+}
+
+button:hover {
+    color: rgb(36, 46, 53);
+    background: rgb(213, 223, 230);
+}
+
 .ct { text-align: center; }
 .mr { margin: 10px; } 
 .pd { padding: 10px; }
 
 
 .dark { 
-    background-color: #56585e;
+    background-color: rgb(48, 61, 70);
     color: rgb(196, 196, 196); 
 }
 .dark a:hover {
     color: white;
 }
 .dark2 { 
-    background-color: #37383b;     
+    background-color: rgb(37, 47, 53);     
     color: rgb(179, 179, 179); 
 }
 .dark2 a:hover {
