@@ -28,3 +28,4 @@ server/base.db
 public
 
 .vscode
+package-lock.json
