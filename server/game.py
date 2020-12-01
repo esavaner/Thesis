@@ -18,9 +18,11 @@ class Game:
 
     def makeMove(self, move):
         m = chess.Move.from_uci(str(move))
-        self.board.push(m)
-        self.moves.append(m)
-        self.turn = 'black' if self.turn == 'white' else 'white'
+        print(self.board.legal_moves)
+        if m in self.board.legal_moves:
+            self.board.push(m)
+            self.moves.append(m)
+            self.turn = 'black' if self.turn == 'white' else 'white'
         return self.board
 
     def addPlayer(self, user):

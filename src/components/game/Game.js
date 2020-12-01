@@ -23,6 +23,10 @@ class GameWithParams extends React.Component {
                 ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
             ],
             picked: null,
+            pX: 0,
+            pY: 0,
+            posX: 0,
+            posY: 0,
             p1: null,
             p2: null,
             started: false,
@@ -31,24 +35,45 @@ class GameWithParams extends React.Component {
             turn: 'white',
             user: getUser()
         }
-        this.update = this.update.bind(this);
     }
 
-    update = (e) => {
-        if (e?.target) {
-            if (!this.state.picked) {
-                this.setState({
-                    picked: e.target.alt
-                })
-            } else {
-                if (this.state.turn === this.state.color)
-                    socket.emit('move', {room: this.props.room, from: this.state.picked, to: e.target.alt, promo: ''})
-                console.log(e.target.alt + ' ' + this.state.picked);
-                this.setState({
-                    picked: null
-                })
-            }
+    pick = (e) => {
+        let x = e.pageX;
+        let y = e.pageY;
+        let alt = e.target.alt;
+        if (!this.state.picked) {
+            this.setState({
+                pX: 0,
+                pY: 0,
+                posX: x,
+                posY: y,
+                picked: alt
+            })
         }
+        e.stopPropagation()
+        e.preventDefault()
+    }
+
+    drop = (e) => {
+        if (this.state.turn === this.state.color && e.target && e.target.alt)
+            socket.emit('move', {room: this.props.room, from: this.state.picked, to: e.target.alt, promo: ''})
+        console.log(this.state.picked + ' ' + e.target.alt);
+        this.setState({
+            picked: null
+        })
+        e.stopPropagation()
+        e.preventDefault()
+    }
+
+    move = (e) => {
+        let x = e.pageX;
+        let y = e.pageY;
+        this.setState({
+            pX: x - this.state.posX - 20,
+            pY: y - this.state.posY 
+        })
+        e.stopPropagation()
+        e.preventDefault()
     }
 
     componentDidMount() {
@@ -90,7 +115,8 @@ class GameWithParams extends React.Component {
         return (
             <div>
                 {this.state.started &&
-                    <Board update={this.update} theme={this.props.theme} grid={this.state.grid} picked={this.state.picked} color={this.state.color}></Board>
+                    <Board pick={this.pick} drop={this.drop} move={this.move} pX={this.state.pX} pY={this.state.pY}
+                    theme={this.props.theme} grid={this.state.grid} picked={this.state.picked} color={this.state.color}></Board>
                 }
                 {!this.state.started &&
                     <div>

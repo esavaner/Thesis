@@ -1,9 +1,7 @@
-.row {
-    height: 35px;
-    width: 280px;
-    margin: auto;
+.board {
+    width: 600px;
+    height: 600px;
 }
-
 @media screen and (min-width: 400px) {
     .row {
         height: 50px;

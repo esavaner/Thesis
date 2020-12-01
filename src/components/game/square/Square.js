@@ -11,10 +11,15 @@ class Square extends React.Component {
     }
 
     render() {
-        let col = this.props.picked === this.props.val ? "P" : this.props.num;
+        let col = this.props.num;
+        let styles = {};
+        if (this.props.picked === this.props.val) {
+            col = "P";
+            styles = {pointerEvents: 'none', position: 'absolute', left: 0, top: 0, zIndex:2, transform: `translate(${this.props.pX}px, ${this.props.pY}px)`};
+        }
         return (
-            <div className={'sq ' + this.props.theme + col} onClick={this.update}>
-                <img src={this.props.piece} alt={this.props.val}></img>
+            <div className={'sq ' + this.props.theme + col} onMouseDown={this.props.pick}>
+                <img src={this.props.piece} alt={this.props.val} style={styles}></img>
             </div>
         );
     }
