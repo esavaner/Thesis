@@ -1,36 +1,30 @@
 .wrap {
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     margin-top: 25vh;
-    max-width: 500px;
-    border: solid 2px;
-    border-color: rgb(43, 43, 43);
+    max-width: 400px;
+    min-width: 300px;
+    min-height: 200px;
+    border-radius: 10px;
 }
 
-.head {
-    font-size: 35px;
+.wrap .rd {
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 260px;
 }
 
-.id {
+.wrap .id {
     font-size: 50px;
     letter-spacing: 10px;
+    text-transform: uppercase;
 }
 
-.url {
-    font-size: 15px;
-}
-
-.row:after {
-    content: '';
-    display: table;
-    clear: both;
-}
-
-.fetch {
-    float: left;
-    margin-left: 10px;
-}
-
-.loader {
+.wrap .loader {
     border: 5px solid #f3f3f3;
     border-top: 5px solid #3498db;
     border-radius: 50%;
@@ -38,6 +32,24 @@
     height: 10px;
     animation: spin 2s linear infinite;
     float: left;
+    margin-right: 10px;
+}
+
+.wrap .fetch {
+    margin: 15px;
+    height: 60px;
+}
+
+.wrap button {
+    margin: 15px;
+}
+
+.wrap span {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+@media screen and (min-width: 1030px) {
 }
   
 @keyframes spin {

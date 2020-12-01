@@ -14,6 +14,10 @@ button:hover {
     background: rgb(213, 223, 230);
 }
 
+a {
+    color: inherit;
+}
+
 .ct { text-align: center; }
 .mr { margin: 10px; } 
 .pd { padding: 10px; }
@@ -34,7 +38,7 @@ button:hover {
     color: white;
 }
 .dark3 { 
-    background-color: #262729;     
+    background-color: #1c1c1d;     
     color: rgb(219, 219, 219); 
 }
 .dark3 a:hover {

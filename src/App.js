@@ -7,15 +7,14 @@ import history from './helpers/history';
 
 import Navbar from './components/navbar/Navbar';
 import NavButton from './components/navbar/NavButton';
-import ColorNav from './components/navbar/ColorNav';
 
 import Login from './components/login/Login';
 import Home from './components/home/Home';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHome, faChessKing, faSignOutAlt, faCog, faMedal, faChessKnight, faChess, faChessBoard } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faChessKing, faSignOutAlt, faSignInAlt, faCog, faMedal, faChessKnight, faChess, faChessBoard } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHome, faChessKing, faSignOutAlt, faCog, faMedal, faChessKnight, faChess, faChessBoard);
+library.add(faHome, faChessKing, faSignOutAlt, faSignInAlt, faCog, faMedal, faChessKnight, faChess, faChessBoard);
 
 class App extends React.Component {
   constructor(props) {

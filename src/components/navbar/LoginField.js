@@ -1,15 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './LoginField.css';
+import './Navbar.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class LoginField extends React.Component {
     render() {
         return (
-            <div>
-                <Link to='/login'><button>Login</button></Link>
-                <Link to='/register'><button>Register</button></Link>
-            </div>
+            <Link to='/login' onClick={this.logoutUser}>
+                <div className='icon'>
+                    <FontAwesomeIcon icon='sign-in-alt'/>
+                </div>
+                <div className='txt'>
+                    Sign in
+                </div>
+            </Link>
         )
     }
 }

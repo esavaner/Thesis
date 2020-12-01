@@ -14,7 +14,6 @@
 }
 
 .page a {
-    color: inherit;
     font-size: 11px;
     margin-top: 10px;
 }
@@ -154,7 +153,7 @@
 
 @media screen and (min-width: 1020px) {
     .container {
-        max-width: 800px;
+        max-width: 750px;
         max-height: 450px;
         height: 50%;
     }

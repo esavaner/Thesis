@@ -1,7 +1,6 @@
 
 .nav a {
     text-decoration: none;
-    color: inherit;
     transition: all 0.2s linear;
     background: linear-gradient(to right, rgb(70, 83, 197),rgb(245, 33, 33));
     background-size:0px 3px;

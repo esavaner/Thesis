@@ -8,6 +8,13 @@
 @media screen and (min-width: 650px) {
   .inactive {
     margin-left: 200px;
+    width: calc(100% - 200px);
+  }
+}
+
+@media screen and (min-width: 1030px) {
+  .inactive {
+    margin-left: 200px;
     width: calc(100% - 400px);
   }
 }

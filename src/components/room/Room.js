@@ -12,18 +12,27 @@ class Room extends React.Component {
         super(props);
         this.state = {
             room: null,
-            error: false
+            error: false,
+            fetch: true
         }
     }
 
     retry = async () => {
+        this.setState({
+            error: false,
+            fetch: true
+        });
         create().then((data) => {
             this.setState({
                 room: data.room,
-                error: false
+                error: false,
+                fetch: false
             });
         }).catch((err) => {
-            this.setState({error: true});
+            this.setState({
+                error: true, 
+                fetch: false
+            });
             console.log(err)
         })
     }
@@ -34,48 +43,36 @@ class Room extends React.Component {
     render() {
         return (
             <div className={this.props.theme + '2 wrap'}>
-                <div className='head ct'>
-                    Creating new room
-                </div>
-                <div className='mr'>
-                    {!this.state.room && !this.state.error &&
-                        <div className='row'>
-                            <div className='loader'></div>
-                            <div className='fetch'>
-                                Fetching new room
-                            </div>
+            <h1>Creating new room</h1>
+                {this.state.fetch &&
+                    <div className='fetch'>
+                        <div className='loader'></div>
+                        <span>Fetching new room</span>
+                    </div>
+                }
+                {this.state.error &&
+                    <>
+                        <div className='err'>
+                            Error occured while creating new room.
                         </div>
-                    }
-                    {this.state.error &&
-                        <div>
-                            <div className='err'>
-                                Error occured while creating new room.
-                            </div>
-                            <button className='' onClick={this.retry}>Retry</button>
+                        <button className='' onClick={this.retry}>Retry</button>
+                    </>
+                }
+                {this.state.room &&
+                    <>
+                        <span>Share this code with your friend</span>
+                        <div className={this.props.theme + '3 rd id'}>
+                            {this.state.room}
                         </div>
-                    }
-                    {this.state.room &&
-                        <div>
-                            <div className='mr'>
-                                <span>Share this code with your friend</span>
-                            </div>
-                            <div className={this.props.theme + '3 ct pd id'}>
-                                {this.state.room}
-                            </div>
-                            <div className='mr'>
-                                Or send this link
-                            </div>
-                            <div className={this.props.theme + '3 ct pd url'}>
-                                <div> {`${API_URL}/h/g/${this.state.room}`}</div>
-                            </div>
-                            <div className='ct mr'>
-                                <Link to={'/h/g/' + this.state.room}>
-                                    <button className=''>Join room</button>
-                                </Link>
-                            </div>
+                        <span>Or send this link</span>
+                        <div className={this.props.theme + '3 rd'}>
+                            <div> {`${API_URL}/h/g/${this.state.room}`}</div>
                         </div>
-                    }
-                </div>
+                        <Link to={'/h/g/' + this.state.room}>
+                            <button className=''>Join room</button>
+                        </Link>
+                    </>
+                }
             </div>
         );
     }
