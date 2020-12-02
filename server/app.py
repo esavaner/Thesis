@@ -105,7 +105,7 @@ def handleMove(data):
     elif game.isInsufficient():
         emit('insufficient', {}, room=room)
     else:
-        emit('moved', {'board': game.getBoard(), 'turn': game.turn }, room=room)
+        emit('moved', {'board': game.getBoard(), 'turn': game.turn, 'moves': game.moves }, room=room)
 
 
 if __name__ == "__main__":

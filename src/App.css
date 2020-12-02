@@ -1,20 +1,38 @@
+.home {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	width: 100vw;
+}
 
 .content {
-  transition: all 0.4s;
-  height: 100vh;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.4s;
+	flex-grow: 1;
+	order: 1;
+}
+
+.toggle {
+	height: 100px;
+	order: 2;
 }
 
 @media screen and (min-width: 650px) {
-  .inactive {
-    margin-left: 200px;
-    width: calc(100% - 200px);
-  }
+	.home {
+		flex-direction: row;
+	}
+
+	.content {
+		order: 3;
+	}
 }
 
 @media screen and (min-width: 1030px) {
-  .inactive {
-    margin-left: 200px;
-    width: calc(100% - 400px);
-  }
+	.content.inactive {
+		margin-right: 150px;
+	}
 }

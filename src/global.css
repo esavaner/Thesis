@@ -18,11 +18,6 @@ a {
     color: inherit;
 }
 
-.ct { text-align: center; }
-.mr { margin: 10px; } 
-.pd { padding: 10px; }
-
-
 .dark { 
     background-color: rgb(48, 61, 70);
     color: rgb(196, 196, 196); 

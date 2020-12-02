@@ -9,24 +9,3 @@ img {
     float: left;
     position: relative;
 }
-
-@media screen and (min-width: 400px) {
-    .sq2 {
-        height: 50px;
-        width: 50px;
-    }
-}
-
-@media screen and (min-width: 600px) {
-    .sq2 {
-        height: 60px;
-        width: 60px;
-    }
-}
-
-@media screen and (min-width: 800px) {
-    .sq2 {
-        height: 70px;
-        width: 70px;
-    }
-}

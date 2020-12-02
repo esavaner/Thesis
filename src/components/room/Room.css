@@ -1,30 +1,29 @@
-.wrap {
-    margin: auto;
+.create-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 25vh;
     max-width: 400px;
+    width: 80%;
     min-width: 300px;
     min-height: 200px;
     border-radius: 10px;
 }
 
-.wrap .rd {
+.create-box .rd {
     padding: 10px;
     border-radius: 10px;
     min-width: 260px;
 }
 
-.wrap .id {
-    font-size: 50px;
+.create-box .id {
+    font-size: 40px;
     letter-spacing: 10px;
     text-transform: uppercase;
 }
 
-.wrap .loader {
+.create-box .loader {
     border: 5px solid #f3f3f3;
     border-top: 5px solid #3498db;
     border-radius: 50%;
@@ -35,16 +34,16 @@
     margin-right: 10px;
 }
 
-.wrap .fetch {
+.create-box .fetch {
     margin: 15px;
     height: 60px;
 }
 
-.wrap button {
+.create-box button {
     margin: 15px;
 }
 
-.wrap span {
+.create-box span {
     margin-top: 10px;
     margin-bottom: 5px;
 }

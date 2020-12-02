@@ -20,7 +20,7 @@ function Field(props) {
 class Navbar extends React.Component {
     render() {
         return (
-            <div className={'nav ' + ((this.props.navActive) ? 'activeNav' : 'inactiveNav') + ' ' + this.props.theme + '2'}>
+            <div className={'nav ' + ((this.props.nav) ? 'active' : 'inactive') + ' ' + this.props.theme + '2'}>
                 <div className='logo'>
                     <FontAwesomeIcon icon='chess' size='3x'/>
                 </div>

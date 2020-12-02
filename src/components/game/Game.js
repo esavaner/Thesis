@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import '../../global.css';
+import './Game.css';
 import Board from './board/Board';
 
 import socket from '../../helpers/sockets';
@@ -69,7 +70,7 @@ class GameWithParams extends React.Component {
         let x = e.pageX;
         let y = e.pageY;
         this.setState({
-            pX: x - this.state.posX - 20,
+            pX: x - this.state.posX,
             pY: y - this.state.posY 
         })
         e.stopPropagation()
@@ -111,18 +112,27 @@ class GameWithParams extends React.Component {
         });
     }
 
+    componentWillUnmount() {
+        socket.close();
+    }
+
     render() {
         return (
-            <div>
-                {this.state.started &&
-                    <Board pick={this.pick} drop={this.drop} move={this.move} pX={this.state.pX} pY={this.state.pY}
-                    theme={this.props.theme} grid={this.state.grid} picked={this.state.picked} color={this.state.color}></Board>
-                }
-                {!this.state.started &&
-                    <div>
-                        Waiting for other player
-                    </div>
-                }
+            <div className='game'>
+                <div className='main'>
+                    {true &&
+                        <Board pick={this.pick} drop={this.drop} move={this.move} pX={this.state.pX} pY={this.state.pY}
+                            theme={this.props.theme} grid={this.state.grid} picked={this.state.picked} color={this.state.color}></Board>
+                    }
+                    {!this.state.started &&
+                        <div>
+                            Waiting for other player
+                        </div>
+                    }
+                </div>
+                <div className='side'>
+                
+                </div>
             </div>
         );
     }
