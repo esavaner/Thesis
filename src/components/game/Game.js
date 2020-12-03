@@ -139,10 +139,12 @@ class GameWithParams extends React.Component {
 
     render() {
         let move_list = [];
-        for (let [i, m] of this.state.moves.entries()) {
-            if (i%2===0) 
-                move_list.push(<div className='part' key={i + 'n'} style={{width: '34%'}}>{i/2 + 1}.</div>)
-            move_list.push(<div className='part' key={i}>{m}</div>)
+        for (let i = 0; i < Math.ceil(this.state.moves.length/2); i++) {
+            let row = [<div className='part' key={i + 'b'}>{i + 1}.</div>];
+            row.push(<div className='part' key={i + 'n'}>{this.state.moves[2*i]}</div>);
+            if (this.state.moves.length !== i*2+1)
+                row.push(<div className='part' key={i + '2n'}>{this.state.moves[2*i + 1]}</div>);
+            move_list.push(<div className='row' key={i + 'r'}>{row}</div>)
         }
         return (
             <div className='game'>

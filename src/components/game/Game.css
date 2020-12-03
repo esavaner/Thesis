@@ -27,8 +27,9 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    transition: all 0.5s;
     border-radius: 15px;
-    width: 85%;
+    width: 70%;
     max-width: 740px;
     height: 20px;
     margin: 15px 0;
@@ -78,15 +79,31 @@
     padding: 15px;
 }
 
+.side .row {
+    height: 20px;
+    width: 100%;
+}
+
 .side .part {
     float: left;
-    height: 20px;
-    width: 30px;
+    width: 33%;
+    animation: 0.3s dash;
 }
 
 .side button {
     padding: 5px 6px;
     margin: 2px;
+}
+
+@keyframes dash {
+    0% {
+        opacity: 0;
+        transform: translateX(20%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @media screen and (min-width: 1000px) {
