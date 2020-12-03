@@ -76,12 +76,14 @@ def handleJoin(data):
     print(data, 'join')
     room = data['room']
     game = rooms[str(room)]
+    if game.started:
+        emit('reject', {}, room=room)
     u = game.addPlayer(data['username'])
     join_room(room)
     if u is not None:
         emit('rejoin', {'room': room, 'color': u.color}, room=room)
         if game.started:
-            emit('start', {}, room=room)
+            emit('start', {'playerW': game.p1.username, 'playerB': game.p2.username}, room=room)
 
 
 @socketio.on('leave')

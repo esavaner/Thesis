@@ -17,8 +17,12 @@
 }
 
 .toggle {
-	height: 100px;
+	height: 28px;
 	order: 2;
+}
+
+.toggle button {
+	padding: 4px 7px;
 }
 
 @media screen and (min-width: 650px) {
@@ -31,7 +35,7 @@
 	}
 }
 
-@media screen and (min-width: 1030px) {
+@media screen and (min-width: 1200px) {
 	.content.inactive {
 		margin-right: 150px;
 	}

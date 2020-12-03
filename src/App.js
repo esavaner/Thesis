@@ -11,10 +11,10 @@ import Login from './components/login/Login';
 import Home from './components/home/Home';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHome, faChessKing, faSignOutAlt, faSignInAlt, faCog, faMedal, faChessKnight, faChess, faChessBoard, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faChessKing, faSignOutAlt, faSignInAlt, faCog, faMedal, faChessKnight, faChess, faChessBoard, faBars, faFlag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-library.add(faHome, faChessKing, faSignOutAlt, faSignInAlt, faCog, faMedal, faChessKnight, faChess, faChessBoard, faBars);
+library.add(faHome, faChessKing, faSignOutAlt, faSignInAlt, faCog, faMedal, faChessKnight, faChess, faChessBoard, faBars, faFlag);
 
 class App extends React.Component {
 	constructor(props) {

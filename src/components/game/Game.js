@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import '../../global.css';
 import './Game.css';
@@ -7,6 +7,7 @@ import Board from './board/Board';
 
 import socket from '../../helpers/sockets';
 import { getUser } from '../../helpers/auth/service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class GameWithParams extends React.Component {
 
@@ -23,6 +24,7 @@ class GameWithParams extends React.Component {
                 ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
                 ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
             ],
+            moves: [],
             picked: null,
             pX: 0,
             pY: 0,
@@ -34,8 +36,13 @@ class GameWithParams extends React.Component {
             finished: false,
             color: null,
             turn: 'white',
-            user: getUser()
+            time1: 6000,
+            time2: 6000,
+            user: getUser(),
+            playerW: 'Anonymous',
+            playerB: 'Anonymous',
         }
+        this.i = null;
     }
 
     pick = (e) => {
@@ -56,8 +63,9 @@ class GameWithParams extends React.Component {
     }
 
     drop = (e) => {
-        if (this.state.turn === this.state.color && e.target && e.target.alt)
+        if (this.state.turn === this.state.color && e.target && e.target.alt) {
             socket.emit('move', {room: this.props.room, from: this.state.picked, to: e.target.alt, promo: ''})
+        }
         console.log(this.state.picked + ' ' + e.target.alt);
         this.setState({
             picked: null
@@ -78,7 +86,7 @@ class GameWithParams extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
+        socket.open();
         socket.emit('join', {room: this.props.room, username: this.state.user.username});
         socket.on('rejoin', (resp) => {
             if (!this.state.color) {
@@ -92,14 +100,25 @@ class GameWithParams extends React.Component {
             console.log(resp, 'moved');
             let board = resp.board.split(/\n/g).map(r => r.split(/ /g));
             console.log(board)
-            this.setState({ grid: board, turn: resp.turn});
+            this.setState({ grid: board, turn: resp.turn, moves: resp.moves});
         });
         socket.on('message', (resp) => {
             console.log(resp, 'message');
         });
         socket.on('start', (resp) => {
             console.log('Started');
-            this.setState({started: true})
+            this.setState({
+                started: true,
+                playerW: resp.playerW || 'Anonymous', 
+                playerB: resp.playerB || 'Anonymous'
+            });
+            this.i = setInterval(() => {
+                if (this.state.turn === this.state.color) {
+                    this.setState({time1: this.state.time1 - 1});
+                } else {
+                    this.setState({time2: this.state.time2 - 1});
+                }
+            }, 100);
         });
         socket.on('finished', (resp) => {
             console.log(resp, 'finished');
@@ -113,25 +132,61 @@ class GameWithParams extends React.Component {
     }
 
     componentWillUnmount() {
+        socket.emit('leave', {room: this.props.room, username: this.state.user.username});
         socket.close();
+        clearInterval(this.i);
     }
 
     render() {
+        let move_list = [];
+        for (let [i, m] of this.state.moves.entries()) {
+            if (i%2===0) 
+                move_list.push(<div className='part' key={i + 'n'} style={{width: '34%'}}>{i/2 + 1}.</div>)
+            move_list.push(<div className='part' key={i}>{m}</div>)
+        }
         return (
             <div className='game'>
                 <div className='main'>
-                    {true &&
-                        <Board pick={this.pick} drop={this.drop} move={this.move} pX={this.state.pX} pY={this.state.pY}
-                            theme={this.props.theme} grid={this.state.grid} picked={this.state.picked} color={this.state.color}></Board>
-                    }
-                    {!this.state.started &&
-                        <div>
-                            Waiting for other player
+                    <div className={'timer '  +  (this.state.color !== this.state.turn ? this.props.theme + '2 turn' : '')}>
+                        <span>
+                            {this.state.color === 'white' ? this.state.playerB : this.state.playerW}
+                        </span>
+                        <div className={this.props.theme + '3 bar'}>
+                            <div className='bar-inner' style={{width: `${this.state.time2*100/6000}%`}}></div>
                         </div>
-                    }
+                        <span>
+                            {Math.floor((this.state.time2%(10*60*60))/(10*60))}m {Math.floor((this.state.time2%(10*60))/(10))}s {Math.floor(this.state.time2%10)}
+                        </span>
+                    </div>
+                    <Board pick={this.pick} drop={this.drop} move={this.move} pX={this.state.pX} pY={this.state.pY}
+                        theme={this.props.theme} grid={this.state.grid} picked={this.state.picked} color={this.state.color}></Board>
+                    <div className={'timer '  +  (this.state.color === this.state.turn ? this.props.theme + '2 turn' : '')}>
+                        <span>
+                            {this.state.user.username || 'Anonymous'}
+                        </span>
+                        <div className={this.props.theme + '3 bar'}>
+                            <div className='bar-inner' style={{width: `${this.state.time1*100/6000}%`}}></div>
+                        </div>
+                        <span>
+                            {Math.floor((this.state.time1%(10*60*60))/(10*60))}m {Math.floor((this.state.time1%(10*60))/(10))}s {Math.floor(this.state.time1%10)}
+                        </span>
+                    </div>
                 </div>
                 <div className='side'>
-                
+                    <div className={this.props.theme + '2 moves'}>
+                        <div style={{textAlign: 'center', margin: '10px'}}>
+                            <Link to='/h'><button><FontAwesomeIcon icon='flag'></FontAwesomeIcon></button></Link>
+                            <button><FontAwesomeIcon icon='cog'></FontAwesomeIcon></button>
+                            <h2>Moves</h2>
+                        </div>
+                        <div className='sep'/>
+                        {this.state.started &&
+                            <div className='move-list'>{move_list}</div>
+                        }
+                        {!this.state.started &&
+                            <div style={{flexGrow: 1}}>Waiting for other player</div>
+                        }
+                </div>
                 </div>
             </div>
         );
