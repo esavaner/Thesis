@@ -48,7 +48,7 @@ class Login extends React.Component {
     }
 
     handleRegister = (e) => {
-        if (this.state.password !== this.state.cpassword) {
+        if (this.state.r_password !== this.state.r_cpassword) {
             console.log('Passwords dont match');
             return;
         }

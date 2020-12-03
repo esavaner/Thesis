@@ -184,7 +184,7 @@
         transform: translate3d(0,0,0) rotate(0deg);
     }
     100% {
-        transform: translate3d(0,1900%,0) rotate(90deg);
+        transform: translate3d(0,1850%,0) rotate(90deg);
         opacity: 0.1;
     }
 }
@@ -194,7 +194,7 @@
         transform: translate3d(0,0,0) rotate(0deg);
     }
     100% {
-        transform: translate3d(0,1900%,0) rotate(-160deg);
+        transform: translate3d(0,1850%,0) rotate(-160deg);
         opacity: 0.1;
     }
 }
@@ -204,7 +204,7 @@
         transform: translate3d(0,0,0) rotate(0deg);
     }
     100% {
-        transform: translate3d(0,1900%,0) rotate(270deg);
+        transform: translate3d(0,1850%,0) rotate(270deg);
         opacity: 0.1;
     }
 }
