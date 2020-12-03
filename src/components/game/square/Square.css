@@ -1,6 +1,7 @@
 img {
     width: 100%;
     max-height: 100%;
+    transition: all 0.05s;
 }
 
 .board .sq {
@@ -8,4 +9,5 @@ img {
     height: 12.5%;
     float: left;
     position: relative;
+    transition: all 0.05s;
 }

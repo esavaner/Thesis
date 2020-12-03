@@ -63,7 +63,7 @@ class GameWithParams extends React.Component {
     }
 
     drop = (e) => {
-        if (this.state.turn === this.state.color && e.target && e.target.alt) {
+        if (this.state.started && this.state.turn === this.state.color && e.target && e.target.alt) {
             socket.emit('move', {room: this.props.room, from: this.state.picked, to: e.target.alt, promo: ''})
         }
         console.log(this.state.picked + ' ' + e.target.alt);

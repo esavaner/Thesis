@@ -6,6 +6,7 @@ import '../../global.css';
 
 import Game from '../game/Game';
 import Room from '../room/Room';
+import Main from '../main/Main';
 
 class Home extends React.Component {
 
@@ -22,9 +23,7 @@ class Home extends React.Component {
                     <Redirect to='/h/c'></Redirect>
                 </Route>
                 <Route path='/h'>
-                    <Link to='/h/c'>
-                        <button>Create Game</button>
-                    </Link>
+                    <Main theme={this.props.theme}></Main>
                 </Route>
             </Switch>
         );

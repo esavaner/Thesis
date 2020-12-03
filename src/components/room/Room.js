@@ -43,7 +43,7 @@ class Room extends React.Component {
     render() {
         return (
             <div className={this.props.theme + '2 create-box'}>
-            <h1>Creating new room</h1>
+                <h1>Creating new room</h1>
                 {this.state.fetch &&
                     <div className='fetch'>
                         <div className='loader'></div>

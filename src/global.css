@@ -47,16 +47,20 @@ a {
 
 
 .light { 
-    background-color: #f9fbff;
+    background-color: #c7c7c7;
     color: black;
 }
 .light2 { 
-    background-color: #bec0c4;
+    background-color: #919191;
     color: black;
 }
 .light3 { 
-    background-color: #525a6b;
+    background-color: #50545c;
     color: black;
+}
+
+.light button {
+    border: 2px solid black;
 }
 
 .lightL { background-color: #bec0c4; }

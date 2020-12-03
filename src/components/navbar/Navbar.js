@@ -18,7 +18,13 @@ function Field(props) {
 }
 
 class Navbar extends React.Component {
+
+    changeCol = (colorButton) => {
+        this.props.changeColor(colorButton.target.value)
+    }
+
     render() {
+        console.log(this.props)
         return (
             <div className={'nav ' + ((this.props.nav) ? 'active' : 'inactive') + ' ' + this.props.theme + '2'}>
                 <div className='logo'>
@@ -66,6 +72,10 @@ class Navbar extends React.Component {
                 </div>
                 <div className='tile'>
                     <Field/>
+                </div>
+                <div className='tile'>
+                <button className='drk' onClick={this.changeCol} value="dark"></button>
+                <button className='lgh' onClick={this.changeCol} value="light"></button>
                 </div>
             </div>
         );

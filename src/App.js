@@ -11,10 +11,16 @@ import Login from './components/login/Login';
 import Home from './components/home/Home';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHome, faChessKing, faSignOutAlt, faSignInAlt, faCog, faMedal, faChessKnight, faChess, faChessBoard, faBars, faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faHome,  faSignOutAlt, faSignInAlt, faCog, faMedal, faBars, faFlag, 
+	faChess, faChessBoard, faChessKing, faChessKnight, faChessPawn, faChessQueen, faChessBishop, faChessRook
+} from '@fortawesome/free-solid-svg-icons';
+import { faFacebook, faGithub, faYoutube, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-library.add(faHome, faChessKing, faSignOutAlt, faSignInAlt, faCog, faMedal, faChessKnight, faChess, faChessBoard, faBars, faFlag);
+library.add(faHome, faSignInAlt, faSignOutAlt, faCog, faMedal, faBars, faFlag, 
+	faChess, faChessBoard, faChessPawn, faChessKing, faChessKnight, faChessQueen, faChessBishop, faChessRook,
+	faFacebook, faGithub, faYoutube, faTwitter
+);
 
 class App extends React.Component {
 	constructor(props) {
@@ -41,7 +47,7 @@ class App extends React.Component {
 					<Switch>
 						<Route path='/h'>
 							<div className={this.state.theme + ' home'}>
-								<Navbar {...this.state}/>
+								<Navbar {...this.state} changeColor={this.changeColor}/>
 								<div className='toggle'>
 									<button onClick={this.changeNav}><FontAwesomeIcon icon='bars'></FontAwesomeIcon></button>
 								</div>
