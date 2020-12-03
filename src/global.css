@@ -9,9 +9,23 @@ button {
     font-size: 13px;
 }
 
-button:hover {
+button:active {
+    transform: scale(0.9);
+    outline: none;
+}
+
+button:active::after {
+    
+}
+
+.dark button:hover {
     color: rgb(36, 46, 53);
     background: rgb(213, 223, 230);
+}
+
+.light button:hover {
+    color: rgb(213, 223, 230);
+    background: rgb(36, 46, 53);
 }
 
 a {
