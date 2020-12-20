@@ -108,18 +108,18 @@
     display: inline-block;
     overflow: hidden;
     width: 5%;
-    max-height: 5%;
+    height: 5%;
     font-size: 15px;
-    animation: falling 5s 0s infinite;
+    animation: falling 5s linear 0s infinite;
     z-index: 1;
 }
 
 .falling i:nth-of-type(2n) {
-    animation: falling2 5s 0s infinite;
+    animation: falling2 5s linear 0s infinite;
 }
 
 .falling i:nth-of-type(3n) {
-    animation: falling3 5s 0s infinite;
+    animation: falling3 5s linear 0s infinite;
 }
 
 .falling i:nth-of-type(n) { animation-delay: 2.2s;}

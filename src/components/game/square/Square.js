@@ -19,6 +19,7 @@ class Square extends React.Component {
         }
         return (
             <div className={'sq ' + this.props.theme + col} onMouseDown={this.props.pick}>
+                <div className='num'>{this.props.val}</div>
                 <img src={this.props.piece} alt={this.props.val} style={styles}></img>
             </div>
         );

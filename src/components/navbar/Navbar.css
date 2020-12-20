@@ -55,8 +55,10 @@
 
 @media screen and (min-width: 650px) {
     .icon {
-        display: inline;
+        display: inline-block;
+        text-align: center;
         font-size: 18px;
+        width: 30px;
     }
 
     .txt {

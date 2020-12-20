@@ -14,10 +14,6 @@ button:active {
     outline: none;
 }
 
-button:active::after {
-    
-}
-
 .dark button:hover {
     color: rgb(36, 46, 53);
     background: rgb(213, 223, 230);
@@ -54,7 +50,7 @@ a {
     color: white;
 }
 
-.darkL { background-color: #bdbdca; }
+.darkL { background-color: #bdbdca; color: black;}
 .darkD { background-color: #4a4a50; }
 .darkP { background-color: #377e37; }
 

@@ -11,3 +11,9 @@ img {
     position: relative;
     transition: all 0.05s;
 }
+
+.board .num {
+    position: absolute;
+    top: 0;
+    left: 2px;
+}

@@ -46,7 +46,17 @@ class Navbar extends React.Component {
                             <FontAwesomeIcon icon='chess-knight'/>
                         </div>
                         <div className='txt'>
-                            Play
+                            vs Player
+                        </div>
+                    </Link>
+                </div>
+                <div className='tile'>
+                    <Link to='/h/b'>
+                        <div className='icon'>
+                            <FontAwesomeIcon icon='graduation-cap'/>
+                        </div>
+                        <div className='txt'>
+                            vs Bot
                         </div>
                     </Link>
                 </div>
