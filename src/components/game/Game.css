@@ -36,6 +36,7 @@
     height: 20px;
     margin: 15px 0;
     padding: 3px;
+    box-shadow: 0 13px 26px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.16);
 }
 
 .main .timer.turn {
@@ -58,6 +59,17 @@
     width: 100%;
     border-radius: 4px;
     background-color: rgb(170, 170, 170);
+}
+
+.main .loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: spin 2s linear infinite;
+    float: left;
+    margin-right: 10px;
 }
 
 .main .player {
@@ -87,22 +99,26 @@
     justify-content: center;
     flex-direction: row;
     align-items: center;
+    min-width: 300px;
     width: 80%;
     height: 80%;
     border-radius: 10px;
+    box-shadow: 0 13px 26px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.16);
 }
 
 .side .move-list {
     flex-grow: 1;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: scroll!important;
     padding: 15px;
-    min-width: 130px;
+    min-width: 145px;
+    max-height: 60%;
 }
 
 .side .row {
     height: 20px;
     width: 100%;
-    min-width: 130px;
+    min-width: 145px;
 }
 
 .side .part {
@@ -179,4 +195,9 @@
     100% {
         transform: scale(1);
     }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

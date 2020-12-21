@@ -37,6 +37,7 @@ class BotGame extends React.Component {
             started: false,
             finished: false,
             difficulty: null,
+            thinking: false,
             user: getUser() || 'Anonymous'
         }
     }
@@ -71,13 +72,19 @@ class BotGame extends React.Component {
         if (this.state.started && e.target && e.target.alt) {
             try {
                 game.move(this.state.picked, e.target.alt);
-                this.setState({grid: this.updateBoard(game.exportFEN())});
+                this.setState({
+                    grid: this.updateBoard(game.exportFEN()),
+                    thinking: true
+                });
                 this.state.moves.push(this.state.picked + e.target.alt)
                 setTimeout(() => {
                     let prev = this.updateBoard(game.exportFEN());
                     game.aiMove(this.state.difficulty);
                     let next = this.updateBoard(game.exportFEN());
-                    this.setState({grid: next});
+                    this.setState({
+                        grid: next,
+                        thinking: false
+                    });
                     this.state.moves.push(this.getMove(prev, next))
                 }, Math.floor(500/(this.state.difficulty+1)));
             } catch (e) {}
@@ -142,7 +149,10 @@ class BotGame extends React.Component {
         return (
             <div className='game'>
                 <div className='main'>
-                    <div className='player'>
+                    <div className='player'> 
+                        {this.state.thinking &&
+                            <span className='loader'></span>
+                        }
                         {this.state.difficulty ? diff[this.state.difficulty] + ' Bot' : 'Bot'}
                     </div>
                     <Board pick={this.pick} drop={this.drop} move={this.move} pX={this.state.pX} pY={this.state.pY}

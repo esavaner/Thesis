@@ -13,6 +13,11 @@
     margin: 10px
 }
 
+.page button:hover {
+    color: rgb(36, 46, 53);
+    background: rgb(213, 223, 230);
+}
+
 .page a {
     font-size: 11px;
     margin-top: 10px;

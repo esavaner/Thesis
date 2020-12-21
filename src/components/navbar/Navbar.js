@@ -70,22 +70,10 @@ class Navbar extends React.Component {
                         </div>
                     </Link>
                 </div>
+                <Field/>
                 <div className='tile'>
-                    <Link to='/h/s'>
-                        <div className='icon'>
-                            <FontAwesomeIcon icon='cog'/>
-                        </div>
-                        <div className='txt'>
-                            Settings
-                        </div>
-                    </Link>
-                </div>
-                <div className='tile'>
-                    <Field/>
-                </div>
-                <div className='tile'>
-                <button className='drk' onClick={this.changeCol} value="dark"></button>
-                <button className='lgh' onClick={this.changeCol} value="light"></button>
+                    <button className='drk' onClick={this.changeCol} value="dark"></button>
+                    <button className='lgh' onClick={this.changeCol} value="light"></button>
                 </div>
             </div>
         );
