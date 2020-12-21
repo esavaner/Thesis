@@ -1,6 +1,8 @@
 .game {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
 }
@@ -28,25 +30,25 @@
     justify-content: center;
     align-items: center;
     transition: all 0.5s;
-    border-radius: 15px;
-    width: 70%;
-    max-width: 740px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 760px;
     height: 20px;
     margin: 15px 0;
-    padding: 5px;
+    padding: 3px;
 }
 
 .main .timer.turn {
-    transform: scale(1.1);
+    animation: next 0.5s linear;
 }
 
 .main .bar {
     float: left;
-    height: 70%;
+    height: 50%;
     flex-grow: 1;
-    border-radius: 20px;
-    margin: 0 4px;
-    padding: 4px;
+    border-radius: 8px;
+    margin: 4px 4px;
+    padding: 2px;
     visibility: hidden;
 }
 
@@ -54,8 +56,12 @@
     float: right;
     height: 100%;
     width: 100%;
-    border-radius: 20px;
+    border-radius: 4px;
     background-color: rgb(170, 170, 170);
+}
+
+.main .player {
+    margin: 10px 0;
 }
 
 .main span {
@@ -83,7 +89,7 @@
     align-items: center;
     width: 80%;
     height: 80%;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .side .move-list {
@@ -96,6 +102,7 @@
 .side .row {
     height: 20px;
     width: 100%;
+    min-width: 130px;
 }
 
 .side .part {
@@ -107,17 +114,6 @@
 .side button {
     padding: 5px 6px;
     margin: 2px;
-}
-
-@keyframes dash {
-    0% {
-        opacity: 0;
-        transform: translateX(20%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }
 
 @media screen and (min-width: 450px) {
@@ -159,5 +155,28 @@
         height: 90%;
         border-left: 1px solid;
         margin: 0 5px;
+    }
+}
+
+@keyframes dash {
+    0% {
+        opacity: 0;
+        transform: translateX(20%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes next {
+    0% {
+        transform: scale(1); 
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
     }
 }

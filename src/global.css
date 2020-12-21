@@ -76,3 +76,22 @@ a {
 .lightL { background-color: #bec0c4; }
 .lightD { background-color: #525a6b; }
 .lightP { background-color: #377e37; }
+
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #e2e2e2;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #777;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

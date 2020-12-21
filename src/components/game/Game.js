@@ -114,9 +114,11 @@ class GameWithParams extends React.Component {
             });
             this.i = setInterval(() => {
                 if (this.state.turn === this.state.color) {
-                    this.setState({time1: this.state.time1 - 1});
+                    if(this.state.time1 > 0)
+                        this.setState({time1: this.state.time1 - 1});
                 } else {
-                    this.setState({time2: this.state.time2 - 1});
+                    if(this.state.time2 > 0)
+                        this.setState({time2: this.state.time2 - 1});
                 }
             }, 100);
         });

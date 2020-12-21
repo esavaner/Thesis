@@ -1,15 +1,17 @@
 import React from 'react';
 import { Link  } from 'react-router-dom';
+import * as jsChessEngine from "js-chess-engine";
 
 import '../../global.css';
 import './Game.css';
 import Board from './board/Board';
+import letters from './figures/letters';
 
-import socket from '../../helpers/sockets';
 import { getUser } from '../../helpers/auth/service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 let diff = ['Beginner', 'Advanced', 'Expert'];
+let game = null;
 
 class BotGame extends React.Component {
 
@@ -34,11 +36,21 @@ class BotGame extends React.Component {
             posY: 0,
             started: false,
             finished: false,
-            color: 'white',
-            turn: 'white',
-            difficulty: 0,
+            difficulty: null,
             user: getUser() || 'Anonymous'
         }
+    }
+
+    start = (e) => {
+        console.log('Started');
+        game = new jsChessEngine.Game();
+        this.setState({
+            started: true,
+            turn: 'white',
+            difficulty: e?.target?.value || 1
+        });
+        console.log(game);
+        console.log(game.exportFEN())
     }
 
     pick = (e) => {
@@ -46,26 +58,31 @@ class BotGame extends React.Component {
         let y = e.pageY;
         let alt = e.target.alt;
         if (!this.state.picked) {
-            this.setState({
-                pX: 0,
-                pY: 0,
-                posX: x,
-                posY: y,
-                picked: alt
-            })
+            this.setState({pX: 0, pY: 0, posX: x, posY: y, picked: alt});
         }
         e.stopPropagation()
         e.preventDefault()
     }
 
     drop = (e) => {
-        if (this.state.started && this.state.turn === this.state.color && e.target && e.target.alt) {
-            socket.emit('move', {room: this.props.room, from: this.state.picked, to: e.target.alt, promo: ''})
-        }
-        console.log(this.state.picked + ' ' + e.target.alt);
         this.setState({
             picked: null
         })
+        if (this.state.started && e.target && e.target.alt) {
+            try {
+                game.move(this.state.picked, e.target.alt);
+                this.setState({grid: this.updateBoard(game.exportFEN())});
+                this.state.moves.push(this.state.picked + e.target.alt)
+                setTimeout(() => {
+                    let prev = this.updateBoard(game.exportFEN());
+                    game.aiMove(this.state.difficulty);
+                    let next = this.updateBoard(game.exportFEN());
+                    this.setState({grid: next});
+                    this.state.moves.push(this.getMove(prev, next))
+                }, Math.floor(500/(this.state.difficulty+1)));
+            } catch (e) {}
+        }
+        console.log(this.state.picked + ' ' + e.target.alt);
         e.stopPropagation()
         e.preventDefault()
     }
@@ -81,43 +98,36 @@ class BotGame extends React.Component {
         e.preventDefault()
     }
 
-    start = (e) => {
-        console.log('Started');
-        this.setState({
-            started: true,
-            difficulty: e?.target?.value || 0
-        });
+    getMove = (prev, next) => {
+        let from, to;
+        for (let i = 0; i < 8; i ++) {
+            for (let j = 0; j < 8; j++) {
+                if (prev[i][j] !== next[i][j]) {
+                    if (next[i][j] === '.')
+                        from = letters[j] + (8 - i);
+                    else
+                        to = letters[j] + (8 - i);
+                }
+            }
+        }
+        return from + to;
     }
 
-    componentDidMount() {
-        socket.open();
-        socket.emit('join', {room: this.props.room, username: this.state.user.username});
-        socket.on('left', (resp) => {
-            console.log(resp, 'left');
-        });
-        socket.on('moved', (resp) => {
-            console.log(resp, 'moved');
-            let board = resp.board.split(/\n/g).map(r => r.split(/ /g));
-            console.log(board)
-            this.setState({ grid: board, turn: resp.turn, moves: resp.moves});
-        });
-        socket.on('message', (resp) => {
-            console.log(resp, 'message');
-        });
-        socket.on('finished', (resp) => {
-            console.log(resp, 'finished');
-        });
-        socket.on('stalemate', (resp) => {
-            console.log(resp, 'stalemate');
-        });
-        socket.on('insufficient', (resp) => {
-            console.log(resp, 'insufficient');
-        });
-    }
-
-    componentWillUnmount() {
-        socket.emit('leave', {room: this.props.room, username: this.state.user.username});
-        socket.close();
+    updateBoard = (board) => {
+        let grid = []
+        let arr = board.toString().split(' ')[0].split('/');
+        for(let row of arr) {
+            let r = []
+            for (let piece of row) {
+                if (!isNaN(parseFloat(piece)) && isFinite(piece)) {
+                    for(let i = 0; i < parseInt(piece); i++)
+                        r.push('.');
+                } else
+                    r.push(piece);
+            }
+            grid.push(r);
+        }
+        return grid;
     }
 
     render() {
@@ -132,19 +142,13 @@ class BotGame extends React.Component {
         return (
             <div className='game'>
                 <div className='main'>
-                    <div className={'timer ' + (this.state.color !== this.state.turn ? this.props.theme + '2 turn' : '')}>
-                        {this.state.started &&
-                            <span>
-                                {diff[this.state.difficulty] + ' Bot'}
-                            </span>
-                        }
+                    <div className='player'>
+                        {this.state.difficulty ? diff[this.state.difficulty] + ' Bot' : 'Bot'}
                     </div>
                     <Board pick={this.pick} drop={this.drop} move={this.move} pX={this.state.pX} pY={this.state.pY}
                         theme={this.props.theme} grid={this.state.grid} picked={this.state.picked} color={this.state.color}></Board>
-                    <div className={'timer '  +  (this.state.color === this.state.turn ? this.props.theme + '2 turn' : '')}>
-                        <span>
-                            {this.state.user.username || 'Anonymous'}
-                        </span>
+                    <div className='player'>
+                        {this.state.user.username || 'Anonymous'}
                     </div>
                 </div>
                 <div className='side'>
