@@ -1,4 +1,4 @@
-import API_URL from '../../config'
+import API_URL from '../config'
 
 
 async function register(user) {
@@ -17,11 +17,28 @@ async function login(user) {
         body: JSON.stringify(user)
     }
     return fetch(`${API_URL}/login`, options).then((response) => response.json()).then((data) => {
-        if (data.accessToken) {
+        if (data.username) {
             localStorage.setItem('user', JSON.stringify(data));
         }
         return data
     });
+}
+
+async function getUsers() {
+    let options = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    }
+    return fetch(`${API_URL}/users`, options).then((response) => response.json());
+}
+
+async function getProfile(username) {
+    let options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({username: username})
+    }
+    return fetch(`${API_URL}/user`, options).then((response) => response.json());
 }
 
 function logout() {
@@ -36,5 +53,7 @@ export {
     register,
     login,
     logout,
-    getUser
+    getUser,
+    getUsers,
+    getProfile
 }

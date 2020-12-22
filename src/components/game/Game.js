@@ -6,7 +6,7 @@ import './Game.css';
 import Board from './board/Board';
 
 import socket from '../../helpers/sockets';
-import { getUser } from '../../helpers/auth/service';
+import { getUser } from '../../helpers/service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class GameWithParams extends React.Component {

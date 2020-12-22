@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getUser } from '../../helpers/auth/service';
+import { getUser } from '../../helpers/service';
 
 import './Navbar.css';
 import '../../global.css';

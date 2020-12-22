@@ -7,7 +7,7 @@ import './Game.css';
 import Board from './board/Board';
 import letters from './figures/letters';
 
-import { getUser } from '../../helpers/auth/service';
+import { getUser } from '../../helpers/service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 let diff = ['Beginner', 'Advanced', 'Expert'];

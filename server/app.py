@@ -39,7 +39,7 @@ def login():
         print('Wrong password')
         return redirect('/')
 
-    return jsonify({'accessToken': '123', 'username': user.username}), 200
+    return jsonify({'username': user.username}), 200
 
 
 @app.route('/register', methods=['POST'])
@@ -59,7 +59,7 @@ def register():
     db.session.add(user)
     db.session.commit()
     print('User registered')
-    return jsonify({'accessToken': '123', 'username': user.username}), 200
+    return jsonify({'username': user.username}), 200
 
 
 @app.route('/create', methods=['POST'])
@@ -69,6 +69,27 @@ def create_room():
     rooms[str(new_id)] = Game(new_id)
     print(rooms)
     return jsonify({'room': new_id}), 200
+
+
+@app.route('/user', methods=['POST'])
+def get_user():
+    print('Request user', request)
+    username = request.json['username']
+    print(username)
+    u = User.query.filter_by(uername = username).first()
+    if not u:
+        print('User not in db')
+        return redirect('/')
+    g = Game.query.filter_by((player1 == username | player2 == username))
+    print(g)
+    return jsonify({'username': u.username, 'games': g}), 200
+
+
+@app.route('/users', methods=['GET'])
+def get_users():
+    print('Request users', request)
+    users = [{'id': u.id, 'username': u.username} for u in User.query.all()]
+    return jsonify(users), 200
 
 
 @socketio.on('join')

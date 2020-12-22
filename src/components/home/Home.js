@@ -9,6 +9,7 @@ import Game from '../game/Game';
 import Room from '../room/Room';
 import Main from '../main/Main';
 import Profile from '../profile/Profile';
+import Ranking from '../ranking/Ranking';
 
 class Home extends React.Component {
 
@@ -32,6 +33,9 @@ class Home extends React.Component {
                 </Route>
                 <Route path='/h/p'>
                     <Redirect to='/login'></Redirect>
+                </Route>
+                <Route path='/h/r'>
+                    <Ranking theme={this.props.theme}></Ranking>
                 </Route>
                 <Route path='/h'>
                     <Main theme={this.props.theme}></Main>

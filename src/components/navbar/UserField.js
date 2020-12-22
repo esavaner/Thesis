@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './UserField.css';
 import './Navbar.css';
 
-import { logout, getUser } from '../../helpers/auth/service';
+import { logout, getUser } from '../../helpers/service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 

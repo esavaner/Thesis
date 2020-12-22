@@ -5,7 +5,7 @@ import history from '../../helpers/history';
 
 import './Login.css';
 import '../../global.css';
-import { login, register, getUser } from '../../helpers/auth/service';
+import { login, register, getUser } from '../../helpers/service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Login extends React.Component {
