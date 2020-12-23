@@ -7,7 +7,12 @@ async function register(user) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     }
-    return await fetch(`${API_URL}/register`, options);
+    return await fetch(`${API_URL}/register`, options).then((response) => response.json()).then((data) => {
+        if (data.username) {
+            localStorage.setItem('user', JSON.stringify(data));
+        }
+        return data
+    });
 }
 
 async function login(user) {

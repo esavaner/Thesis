@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_socketio import SocketIO, join_room, leave_room, send, emit
 from passlib.hash import sha256_crypt
-from model import User, db
+from model import Users, Games, db
 from game import Game
 import random
 import string
@@ -29,17 +29,17 @@ def login():
     email = request.json['email']
     password = request.json['password']
 
-    user = User.query.filter_by(email=email).first()
+    u = Users.query.filter_by(email=email).first()
 
-    if not user:
+    if not u:
         print('No user in db')
         return redirect('/')
     
-    if not sha256_crypt.verify(password, user.password):
+    if not sha256_crypt.verify(password, u.password):
         print('Wrong password')
         return redirect('/')
 
-    return jsonify({'username': user.username}), 200
+    return jsonify(u.show()), 200
 
 
 @app.route('/register', methods=['POST'])
@@ -50,16 +50,16 @@ def register():
     password = request.json['password']
     print(username, email, password)
 
-    if User.query.filter_by(email=email).first():
+    if Users.query.filter_by(email=email).first():
         print('User in db')
         return redirect('/')
     
     hashed = sha256_crypt.hash(password)
-    user = User(username=username, password=hashed, email=email)
-    db.session.add(user)
+    u = Users(username=username, password=hashed, email=email, elo=1000, highest=1000, won=0, lost=0, stalemate=0)
+    db.session.add(u)
     db.session.commit()
     print('User registered')
-    return jsonify({'username': user.username}), 200
+    return jsonify(u.show()), 200
 
 
 @app.route('/create', methods=['POST'])
@@ -76,19 +76,19 @@ def get_user():
     print('Request user', request)
     username = request.json['username']
     print(username)
-    u = User.query.filter_by(uername = username).first()
+    u = Users.query.filter_by(uername = username).first()
     if not u:
         print('User not in db')
         return redirect('/')
     g = Game.query.filter_by((player1 == username | player2 == username))
     print(g)
-    return jsonify({'username': u.username, 'games': g}), 200
+    return jsonify({'user': u.show(), 'games': g}), 200
 
 
 @app.route('/users', methods=['GET'])
 def get_users():
     print('Request users', request)
-    users = [{'id': u.id, 'username': u.username} for u in User.query.all()]
+    users = [u.show() for u in Users.query.all()]
     return jsonify(users), 200
 
 
@@ -100,8 +100,8 @@ def handleJoin(data):
     if game.started:
         emit('reject', {}, room=room)
     u = game.addPlayer(data['username'])
-    join_room(room)
     if u is not None:
+        join_room(room)
         emit('rejoin', {'room': room, 'color': u.color}, room=room)
         if game.started:
             emit('start', {'playerW': game.p1.username, 'playerB': game.p2.username}, room=room)
@@ -122,14 +122,14 @@ def handleMove(data):
     game = rooms[str(room)]
     game.makeMove(data['from'] + data['to'] + data['promo'])
     if game.isFinished():
-        emit('finished', {}, room=room)
-    elif game.isStalemate():
-        emit('stalemate', {}, room=room)
-    elif game.isInsufficient():
-        emit('insufficient', {}, room=room)
+        emit('finished', {'win_type': game.win_type, 'winner': game.winner.username}, room=room)
+        g = Games(player1=game.p1.username, player2=game.p2.username, moves=str(game.moves), winner=game.winner.username, 
+                before1=game.p1.before, before2=game.p2.before, after1=game.p1.after, after2=game.p2.after)
+        db.session.add(g)
+        db.session.commit()
     else:
-        emit('moved', {'board': game.getBoard(), 'turn': game.turn, 'moves': game.moves }, room=room)
+        emit('moved', game.show(), room=room)
 
 
 if __name__ == "__main__":
-    socketio.run(app) 
+    socketio.run(app)

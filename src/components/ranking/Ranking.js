@@ -39,7 +39,7 @@ class Ranking extends React.Component {
 
     render() {
         let ranking = this.state.users.map((user, i) => {
-            return <div key={i}>{user.username}</div>;
+            return <div key={i}>{user.username}, {user.elo}, {user.highest}, {user.won}, {user.lost}, {user.stalemate}</div>;
         });
         return (
             <>
