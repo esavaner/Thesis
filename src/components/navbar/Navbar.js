@@ -24,7 +24,6 @@ class Navbar extends React.Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div className={'nav ' + ((this.props.nav) ? 'active' : 'inactive') + ' ' + this.props.theme + '2'}>
                 <div className='logo'>

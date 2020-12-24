@@ -1,11 +1,77 @@
+.ranking {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.outside table {
+    width: 100%;
+    height: 100%;
+    font-size: 10px;
+    border-collapse: collapse;
+}
+
+.outside {
+    min-width: 300px;
+    max-width: 900px;
+    width: 90%;
+    margin-top: 40px;
+    height: 85%;
+    border-radius: 10px;
+    box-shadow: 0 13px 26px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.16);
+    overflow: hidden;
+}
+
+.inside {
+    height: 100%;
+    overflow: auto;
+}
+
+.outside thead tr{
+    background: linear-gradient(to right, rgb(70, 83, 197),rgb(161, 49, 49));
+}
+
+.outside tr {
+    height: 60px;
+}
+
+.outside tbody tr:hover {
+    border: solid 1px black;
+    border-radius: 10px;
+}
+
+.outside td {
+    width: 12%;
+    padding-left: 5%;
+    overflow: hidden;
+}
+
+.inside td {
+    width: 16.6%;
+}
+
+.outside a {
+    text-decoration: none;
+}
+
 .react-paginate {
     display: inline-block;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 13px 26px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.16);
 }
   
 .react-paginate li {
     display: inline-block;
-    padding-left: 15px;
-    padding-right: 15px;
+    margin: 0px 15px;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 400px) {
+    .outside table {
+        font-size: 17px;
+    }
 }

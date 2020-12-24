@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
+import { Link } from 'react-router-dom';
 import { getUsers} from '../../helpers/service';
 
 import './Ranking.css';
@@ -10,7 +11,7 @@ class Ranking extends React.Component {
         super(props);
         this.state = {
             pageCount: 1,
-            perPage: 10,
+            perPage: 30,
             offset: 0,
             users: []
         }
@@ -19,8 +20,12 @@ class Ranking extends React.Component {
     loadUsers = async () => {
         let u = await getUsers();
         this.setState({
-            users: u.slice(this.state.offset, this.state.offset + this.state.perPage),
-            pageCount: Math.ceil([].length / this.state.perPage),
+            users: u.sort((a, b) => {
+                if (a.elo < b.elo) return 1;
+                if (a.elo > b.elo) return -1;
+                return 0;
+            }).slice(this.state.offset, this.state.offset + this.state.perPage),
+            pageCount: Math.ceil(u.length / this.state.perPage),
         });
     }
 
@@ -39,16 +44,41 @@ class Ranking extends React.Component {
 
     render() {
         let ranking = this.state.users.map((user, i) => {
-            return <div key={i}>{user.username}, {user.elo}, {user.highest}, {user.won}, {user.lost}, {user.stalemate}</div>;
+            return  <tr key={i}>
+                        <td>{i + 1 + this.state.offset}.</td>
+                        <td><Link to={'/h/p/' + user.username}>{user.username}</Link></td>
+                        <td>{user.elo}</td>
+                        <td>{user.won}</td>
+                        <td>{user.lost}</td>
+                        <td>{user.stalemate}</td>
+                    </tr>;
         });
         return (
-            <>
-                <div>
-                    {ranking}
+            <div className='ranking'>
+                <div className='outside'>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Rank</td>
+                                <td>Player</td>
+                                <td>Points</td>
+                                <td>Wins</td>
+                                <td>Looses</td>
+                                <td>Stalemates</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div className='inside'>
+                        <table>
+                            <tbody>
+                                {ranking}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <ReactPaginate
-                    previousLabel={'previous'}
-                    nextLabel={'next'}
+                    previousLabel={'Previous'}
+                    nextLabel={'Next'}
                     breakLabel={'...'}
                     breakClassName={'break-me'}
                     pageCount={this.state.pageCount}
@@ -59,7 +89,7 @@ class Ranking extends React.Component {
                     subContainerClassName={'pages pagination'}
                     activeClassName={'active'}
                 />
-            </>
+            </div>
         )
     }
 }

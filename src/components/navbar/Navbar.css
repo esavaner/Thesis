@@ -2,7 +2,7 @@
 .nav a {
     text-decoration: none;
     transition: all 0.2s linear;
-    background: linear-gradient(to right, rgb(70, 83, 197),rgb(245, 33, 33));
+    background: linear-gradient(to right, rgb(70, 83, 197),rgb(161, 49, 49));
     background-size:0px 3px;
     background-repeat: no-repeat;
     background-position: left 85%;

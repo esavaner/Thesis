@@ -5,7 +5,7 @@ from flask_socketio import SocketIO, join_room, leave_room, send, emit
 from passlib.hash import sha256_crypt
 from model import Users, Games, db
 from game import Game
-import random
+from random import choices, randint
 import string
 
 app = Flask(__name__)
@@ -20,6 +20,12 @@ app.host = 'localhost'
 db.init_app(app)
 with app.app_context():
     db.create_all()
+    for i in range(20):
+        i = str(i)
+        u = Users(username=('user' + i), password='pass' + i, email=('user' + i + '@mail.com'), 
+            elo=randint(500, 1500), highest=randint(1500, 2000), won=randint(0, 100), lost=randint(0, 100), stalemate=randint(0, 100))
+        db.session.add(u)
+    db.session.commit()
 
 rooms = {}
 
@@ -65,7 +71,7 @@ def register():
 @app.route('/create', methods=['POST'])
 def create_room():
     print('Creating room', request)
-    new_id = ''.join(random.choices(string.ascii_lowercase + string.digits, k=6))
+    new_id = ''.join(choices(string.ascii_lowercase + string.digits, k=6))
     rooms[str(new_id)] = Game(new_id)
     print(rooms)
     return jsonify({'room': new_id}), 200

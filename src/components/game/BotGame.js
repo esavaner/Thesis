@@ -65,27 +65,44 @@ class BotGame extends React.Component {
         e.preventDefault()
     }
 
+    checkFinished = (game) => {
+        console.log(game.exportJson());
+        if (game.exportJson().isFinished) {
+            this.setState({
+                finished: true
+            });
+            console.log('finished');
+            console.log(game.exportJson().turn);
+        }
+    }
+
     drop = (e) => {
         this.setState({
             picked: null
         })
         if (this.state.started && e.target && e.target.alt) {
             try {
-                game.move(this.state.picked, e.target.alt);
-                this.setState({
-                    grid: this.updateBoard(game.exportFEN()),
-                    thinking: true
-                });
-                this.state.moves.push(this.state.picked + e.target.alt)
-                setTimeout(() => {
-                    let prev = this.updateBoard(game.exportFEN());
-                    game.aiMove(this.state.difficulty);
-                    let next = this.updateBoard(game.exportFEN());
+                if (!this.state.finished) {
+                    game.move(this.state.picked, e.target.alt);
                     this.setState({
-                        grid: next,
-                        thinking: false
+                        grid: this.updateBoard(game.exportFEN()),
+                        thinking: true
                     });
-                    this.state.moves.push(this.getMove(prev, next))
+                    this.state.moves.push(this.state.picked + e.target.alt);
+                    this.checkFinished(game);
+                }
+                setTimeout(() => {
+                    if (!this.state.finished) {
+                        let prev = this.updateBoard(game.exportFEN());
+                        game.aiMove(this.state.difficulty);
+                        let next = this.updateBoard(game.exportFEN());
+                        this.setState({
+                            grid: next,
+                            thinking: false
+                        });
+                        this.state.moves.push(this.getMove(prev, next))
+                        this.checkFinished(game);
+                    }
                 }, Math.floor(500/(this.state.difficulty+1)));
             } catch (e) {}
         }
