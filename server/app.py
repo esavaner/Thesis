@@ -20,7 +20,7 @@ app.host = 'localhost'
 db.init_app(app)
 with app.app_context():
     db.create_all()
-    for i in range(20):
+    for i in range(5):
         i = str(i)
         u = Users(username=('user' + i), password='pass' + i, email=('user' + i + '@mail.com'), 
             elo=randint(500, 1500), highest=randint(1500, 2000), won=randint(0, 100), lost=randint(0, 100), stalemate=randint(0, 100))
@@ -82,11 +82,11 @@ def get_user():
     print('Request user', request)
     username = request.json['username']
     print(username)
-    u = Users.query.filter_by(uername = username).first()
+    u = Users.query.filter_by(username=username).first()
     if not u:
         print('User not in db')
         return redirect('/')
-    g = Game.query.filter_by((player1 == username | player2 == username))
+    g = Games.query.filter_by(player1=username).all() + Games.query.filter_by(player2=username).all()
     print(g)
     return jsonify({'user': u.show(), 'games': g}), 200
 
@@ -95,6 +95,9 @@ def get_user():
 def get_users():
     print('Request users', request)
     users = [u.show() for u in Users.query.all()]
+    users = sorted(users, key=lambda x: x['elo'], reverse=True)[:501]
+    for i, y in enumerate(users):
+        y['rank'] = i+1
     return jsonify(users), 200
 
 

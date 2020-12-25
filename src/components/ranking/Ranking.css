@@ -7,6 +7,32 @@
     height: 100%;
 }
 
+.outside .top {
+    height: 100px;
+}
+
+.outside .bot {
+    height: 52px;
+}
+
+.outside .gr {
+    color: rgb(31, 160, 31);
+}
+
+.outside .rd {
+    color: rgb(189, 34, 34);
+}
+
+.outside {
+    min-width: 300px;
+    max-width: 850px;
+    width: 90%;
+    max-height: 75%;
+    border-radius: 10px;
+    box-shadow: 0 13px 26px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.16);
+    overflow: hidden;
+}
+
 .outside table {
     width: 100%;
     height: 100%;
@@ -14,28 +40,9 @@
     border-collapse: collapse;
 }
 
-.outside {
-    min-width: 300px;
-    max-width: 900px;
-    width: 90%;
-    margin-top: 40px;
-    height: 85%;
-    border-radius: 10px;
-    box-shadow: 0 13px 26px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.16);
-    overflow: hidden;
-}
-
-.inside {
-    height: 100%;
-    overflow: auto;
-}
-
 .outside thead tr{
-    background: linear-gradient(to right, rgb(70, 83, 197),rgb(161, 49, 49));
-}
-
-.outside tr {
     height: 60px;
+    background: linear-gradient(to right, rgb(70, 83, 197),rgb(161, 49, 49));
 }
 
 .outside tbody tr:hover {
@@ -45,17 +52,29 @@
 
 .outside td {
     width: 12%;
-    padding-left: 5%;
+    padding-left: 3%;
     overflow: hidden;
-}
-
-.inside td {
-    width: 16.6%;
 }
 
 .outside a {
     text-decoration: none;
 }
+
+.outside button {
+    padding: 2px;
+}
+
+.inside {
+    height: 100%;
+    overflow: auto;
+}
+
+.inside td {
+    width: 16.6%;
+    padding-left: 4%;
+}
+
+.inside tr:nth-of-type(2n) { background: rgba(0,0,0,0.1);}
 
 .react-paginate {
     display: inline-block;
