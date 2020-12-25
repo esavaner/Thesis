@@ -14,7 +14,7 @@ class Users(db.Model):
     stalemate = db.Column(db.Integer, nullable=True)
 
     def show(self):
-        wr = (self.won*100)/(self.won + self.lost) if self.won + self.lost is not 0 else 0
+        wr = (self.won*100)/(self.won + self.lost) if self.won + self.lost != 0 else 0
         return {'id': self.id, 'rank': None, 'username': self.username, 'elo': self.elo, 'highest': self.highest, 
                 'won': self.won, 'lost': self.lost, 'stalemate': self.stalemate, 'win_ratio': wr, 'total': self.won + self.lost + self.stalemate}
 
@@ -28,7 +28,8 @@ class Games(db.Model):
     before2 = db.Column(db.Integer, nullable=True)
     after1 = db.Column(db.Integer, nullable=True)
     after2 = db.Column(db.Integer, nullable=True)
+    played = db.Column(db.String(30), nullable=True)
 
     def show(self):
         return {'id': self.id, 'player1': self.player1, 'player2': self.player2, 'moves': str(self.moves), 'winner': self.winner, 
-        'before1': self.before1, 'before2': self.before2, 'after1': self.after1, 'after2': self.after2}
+        'before1': self.before1, 'before2': self.before2, 'after1': self.after1, 'after2': self.after2, 'played': self.played}

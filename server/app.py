@@ -6,6 +6,7 @@ from passlib.hash import sha256_crypt
 from model import Users, Games, db
 from game import Game
 from random import choices, randint
+from datetime import date
 import string
 
 app = Flask(__name__)
@@ -21,10 +22,12 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
     for i in range(5):
-        i = str(i)
-        u = Users(username=('user' + i), password='pass' + i, email=('user' + i + '@mail.com'), 
+        u = Users(username=('user' + str(i)), password='pass' + str(i), email=('user' + str(i) + '@mail.com'), 
             elo=randint(500, 1500), highest=randint(1500, 2000), won=randint(0, 100), lost=randint(0, 100), stalemate=randint(0, 100))
+        g = Games(player1=('user' + str(i)), player2=('user' + str(i+1)), moves=str(['g2g3','d7d5','h2h3','c8h3','f1h3','g8f6','g3g4','f6g4','h3g4','b8c6','e2e3','e7e5','f2f4','e5f4','e3f4','f8b4','c2c3']), winner=('user' + str(i)), 
+                before1=randint(500, 1500), before2=randint(500, 1500), after1=randint(500, 1500), after2=randint(500, 1500), played=date.today().strftime('%d/%m/%Y'))
         db.session.add(u)
+        db.session.add(g)
     db.session.commit()
 
 rooms = {}
@@ -86,9 +89,9 @@ def get_user():
     if not u:
         print('User not in db')
         return redirect('/')
-    g = Games.query.filter_by(player1=username).all() + Games.query.filter_by(player2=username).all()
-    print(g)
-    return jsonify({'user': u.show(), 'games': g}), 200
+    games = Games.query.filter_by(player1=username).all() + Games.query.filter_by(player2=username).all()
+    games = sorted(games, key=lambda x: x.id, reverse=True)
+    return jsonify({'user': u.show(), 'games': [g.show() for g in games]}), 200
 
 
 @app.route('/users', methods=['GET'])
@@ -133,7 +136,7 @@ def handleMove(data):
     if game.isFinished():
         emit('finished', {'win_type': game.win_type, 'winner': game.winner.username}, room=room)
         g = Games(player1=game.p1.username, player2=game.p2.username, moves=str(game.moves), winner=game.winner.username, 
-                before1=game.p1.before, before2=game.p2.before, after1=game.p1.after, after2=game.p2.after)
+                before1=game.p1.before, before2=game.p2.before, after1=game.p1.after, after2=game.p2.after, played=date.today().strftime('%d/%m/%Y'))
         db.session.add(g)
         db.session.commit()
     else:

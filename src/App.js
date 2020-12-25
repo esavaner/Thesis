@@ -11,13 +11,13 @@ import Login from './components/login/Login';
 import Home from './components/home/Home';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHome,  faSignOutAlt, faSignInAlt, faUser, faMedal, faBars, faFlag, faGraduationCap, faCog, faSort, faCrown,
+import { faHome,  faSignOutAlt, faSignInAlt, faUser, faMedal, faBars, faFlag, faGraduationCap, faCog, faSort, faCrown, faExternalLinkAlt,
 	faChess, faChessBoard, faChessKing, faChessKnight, faChessPawn, faChessQueen, faChessBishop, faChessRook
 } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faGithub, faYoutube, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-library.add(faHome, faSignInAlt, faSignOutAlt, faUser, faMedal, faBars, faFlag, faGraduationCap, faCog, faSort, faCrown,
+library.add(faHome, faSignInAlt, faSignOutAlt, faUser, faMedal, faBars, faFlag, faGraduationCap, faCog, faSort, faCrown, faExternalLinkAlt,
 	faChess, faChessBoard, faChessPawn, faChessKing, faChessKnight, faChessQueen, faChessBishop, faChessRook,
 	faFacebook, faGithub, faYoutube, faTwitter
 );

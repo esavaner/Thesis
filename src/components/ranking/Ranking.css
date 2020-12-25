@@ -46,8 +46,7 @@
 }
 
 .outside tbody tr:hover {
-    border: solid 1px black;
-    border-radius: 10px;
+    background: rgba(34, 65, 133, 0.3);
 }
 
 .outside td {
