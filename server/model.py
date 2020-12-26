@@ -31,5 +31,5 @@ class Games(db.Model):
     played = db.Column(db.String(30), nullable=True)
 
     def show(self):
-        return {'id': self.id, 'player1': self.player1, 'player2': self.player2, 'moves': str(self.moves), 'winner': self.winner, 
+        return {'id': self.id, 'player1': self.player1, 'player2': self.player2, 'moves': self.moves, 'winner': self.winner, 
         'before1': self.before1, 'before2': self.before2, 'after1': self.after1, 'after2': self.after2, 'played': self.played}

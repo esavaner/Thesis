@@ -46,6 +46,15 @@ async function getProfile(username) {
     return fetch(`${API_URL}/user`, options).then((response) => response.json());
 }
 
+async function getGame(id) {
+    let options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({game_id: id})
+    }
+    return fetch(`${API_URL}/game`, options).then((response) => response.json());
+}
+
 function logout() {
     localStorage.removeItem('user');
 }
@@ -60,5 +69,6 @@ export {
     logout,
     getUser,
     getUsers,
+    getGame,
     getProfile
 }

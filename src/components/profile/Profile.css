@@ -65,7 +65,7 @@
 .games {
     min-width: 300px;
     max-width: 900px;
-    width: 85%;
+    width: 95%;
     max-height: 60%;
     border-radius: 10px;
     box-shadow: 0 13px 26px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.16);
@@ -82,7 +82,7 @@
 .games .history table {
     width: 100%;
     height: 100%;
-    font-size: 10px;
+    font-size: 11px;
     border-collapse: collapse;
 }
 
@@ -129,6 +129,13 @@
 }
 
 .games a { text-decoration: none; }
+
+.over {
+    min-width: 295px;
+    max-width: 895px;
+    width: 93%;
+    margin-top: 15px;
+}
 
 @media screen and (min-width: 850px) {
     .profile .stats div {

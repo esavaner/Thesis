@@ -34,6 +34,12 @@ class GameWithParams extends React.Component {
             p2: null,
             started: false,
             finished: false,
+            win_type: null,
+            winner: null,
+            before1: 1000,
+            before2: 1000,
+            after1: 1000,
+            after2: 1000,
             color: null,
             turn: 'white',
             time1: 6000,
@@ -124,12 +130,17 @@ class GameWithParams extends React.Component {
         });
         socket.on('finished', (resp) => {
             console.log(resp, 'finished');
-        });
-        socket.on('stalemate', (resp) => {
-            console.log(resp, 'stalemate');
-        });
-        socket.on('insufficient', (resp) => {
-            console.log(resp, 'insufficient');
+            this.setState({
+                finished: true,
+                win_type: resp.win_type,
+                winner: resp.winner,
+                before1: resp.before1 || 1000,
+                before2: resp.before2 || 1000,
+                after1: resp.after1 || 1000,
+                after2: resp.after2 || 1000
+            });
+            socket.close();
+            clearInterval(this.i);
         });
     }
 
@@ -148,9 +159,45 @@ class GameWithParams extends React.Component {
                 row.push(<div className='part' key={i + '2n'}>{this.state.moves[2*i + 1]}</div>);
             move_list.push(<div className='row' key={i + 'r'}>{row}</div>)
         }
+        let wt = null;
+        let score1 = null;
+        let score2 = null;
+        let pl = null;
+        let op = null;
+        if (this.state.win_type === 'normal') {
+            if (this.state.winner === this.state.user.username) wt = 'Victory';
+            else wt = 'Defeat';
+            console.log(this.state)
+            pl = this.state.user.username === this.state.playerW ? 1 : 2;
+            op = this.state.user.username === this.state.playerW ? 2 : 1;
+            console.log(pl, op)
+            score1 = this.state['after'+pl] - this.state['before'+pl] > 0 ? <span className='won'>+{this.state['after'+pl] - this.state['before'+pl]}</span> : <span className='lost'>{this.state['after'+pl] - this.state['before'+pl]}</span>;
+            score2 = this.state['after'+op] - this.state['before'+op] > 0 ? <span className='won'>+{this.state['after'+op] - this.state['before'+op]}</span> : <span className='lost'>{this.state['after'+op] - this.state['before'+op]}</span>;
+        } else if (this.state.win_type === 'stalemate'){
+            wt = 'Stalemate';
+            pl = this.state.user.username === this.state.playerW ? 1 : 2;
+            op = this.state.user.username === this.state.playerW ? 2 : 1;
+            score1 = <>+0</>
+            score2 = <>+0</>
+        }
         return (
             <div className='game'>
                 <div className='main'>
+                    {this.state.finished &&
+                        <div className={this.props.theme + '2 end'}>
+                            <h1>{wt}</h1>
+                            <div className='players'>
+                                <div>{this.state.user.username || 'Anonymous'}</div>
+                                <div><small>vs</small></div>
+                                <div>{this.state.color === 'white' ? this.state.playerB : this.state.playerW}</div>
+                            </div>
+                            <div>
+                                <span>{this.state['before'+pl]} <small>({score1 || '+0'})</small></span>
+                                <span>{this.state['before'+op]} <small>({score2 || '+0'})</small></span>
+                            </div>
+                            <Link to='/h'><button>Exit</button></Link>
+                        </div>
+                    }
                     <div className={'timer '  +  (this.state.color !== this.state.turn ? this.props.theme + '2 turn' : '')}>
                         <span>
                             {this.state.color === 'white' ? this.state.playerB : this.state.playerW}

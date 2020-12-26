@@ -12,6 +12,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
     width: 100%;
     height: 70%;
 }
@@ -22,6 +23,48 @@
     align-items: center;
     width: 100%;
     height: 30%;
+}
+
+.main .end {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    z-index: 10;
+    width: 300px;
+    height: 220px;
+    border-radius: 10px;
+    box-shadow: 0 13px 26px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.16);
+    animation: slide 0.9s linear;
+}
+
+.main .end .players {
+    width: 180;
+}
+
+.main .end button {
+    margin-top: 10px;
+}
+
+.main .end .players div {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+}
+
+.main .end span {
+    margin: 5px 20px;
+}
+
+.main .end span.won {
+    color: rgb(70, 150, 70);
+    margin: 0px;
+}
+
+.main .end span.lost {
+    color: rgb(223, 24, 24);
+    margin: 0px;
 }
 
 .main .timer {
@@ -94,6 +137,10 @@
     margin-top: 8px;
 }
 
+.side .direct {
+    margin-top: 10px;
+}
+
 .side .moves {
     display: flex;
     justify-content: center;
@@ -123,8 +170,18 @@
 
 .side .part {
     float: left;
+    text-align: center;
     width: 33%;
     animation: 0.3s dash;
+}
+
+.side .current {
+    background: rgba(49, 90, 179, 0.616);
+}
+
+.side .mini-timer {
+    height: 5px;
+    background: linear-gradient(to right, rgb(70, 83, 197),rgb(161, 49, 49));
 }
 
 .side button {

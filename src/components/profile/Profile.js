@@ -54,14 +54,15 @@ class ProfileWithParams extends React.Component {
             let score = game['after'+pl] - game['before'+pl] > 0 ? <span className='won'>+{game['after'+pl] - game['before'+pl]}</span> : <span className='lost'>{game['after'+pl] - game['before'+pl]}</span>;
             return  <tr key={i}>
                         <td className='mark'><div className={'col ' + res}></div></td>
-                        <td><small>vs</small> {game['player' + opp]}</td>
+                        <td><small>vs</small> {game['player' + opp] || 'Anonymous'}</td>
                         <td>{game['after'+pl]} <small>({score}) points</small></td>
                         <td>{game.played}</td>
-                        <td><Link to='/h'><small>watch</small> <FontAwesomeIcon icon='external-link-alt'/></Link></td>
+                        <td><Link to={'/h/w/' + game.id}><small>watch</small> <FontAwesomeIcon icon='external-link-alt'/></Link></td>
                     </tr>;
         });
         return (
             <>
+                <div className='over'>Overview</div>
                 <div className='profile'>
                     <div className='left'>
                         <span>{this.state.username}</span>
@@ -76,6 +77,7 @@ class ProfileWithParams extends React.Component {
                         <div>Stalemates<br/><span>{this.state.stalemate}</span></div>
                     </div>
                 </div>
+                <div className='over'>Recent games</div>
                 <div className={this.props.theme + '2 games'}>
                     <div className='history'>
                         <table>

@@ -22,9 +22,9 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
     for i in range(5):
-        u = Users(username=('user' + str(i)), password='pass' + str(i), email=('user' + str(i) + '@mail.com'), 
+        u = Users(username=('user' + str(i)), password=sha256_crypt.hash('pass' + str(i)), email=('user' + str(i) + '@mail.com'), 
             elo=randint(500, 1500), highest=randint(1500, 2000), won=randint(0, 100), lost=randint(0, 100), stalemate=randint(0, 100))
-        g = Games(player1=('user' + str(i)), player2=('user' + str(i+1)), moves=str(['g2g3','d7d5','h2h3','c8h3','f1h3','g8f6','g3g4','f6g4','h3g4','b8c6','e2e3','e7e5','f2f4','e5f4','e3f4','f8b4','c2c3']), winner=('user' + str(i)), 
+        g = Games(player1=('user' + str(i)), player2=('user' + str(i+1)), moves=str(["h2h4","d7d5","g1f3","b8d7","f3e5","d7e5","f2f4","g8f6","h1h3","c8h3"]), winner=('user' + str(i)), 
                 before1=randint(500, 1500), before2=randint(500, 1500), after1=randint(500, 1500), after2=randint(500, 1500), played=date.today().strftime('%d/%m/%Y'))
         db.session.add(u)
         db.session.add(g)
@@ -37,9 +37,7 @@ def login():
     print('Login', request.json)
     email = request.json['email']
     password = request.json['password']
-
     u = Users.query.filter_by(email=email).first()
-
     if not u:
         print('No user in db')
         return redirect('/')
@@ -94,6 +92,16 @@ def get_user():
     return jsonify({'user': u.show(), 'games': [g.show() for g in games]}), 200
 
 
+@app.route('/game', methods=['POST'])
+def get_game():
+    print('Request game', request)
+    game_id = request.json['game_id']
+    print(game_id)
+    g = Games.query.filter_by(id=game_id).first()
+    print(g)
+    return jsonify(g.show()), 200
+
+
 @app.route('/users', methods=['GET'])
 def get_users():
     print('Request users', request)
@@ -134,7 +142,8 @@ def handleMove(data):
     game = rooms[str(room)]
     game.makeMove(data['from'] + data['to'] + data['promo'])
     if game.isFinished():
-        emit('finished', {'win_type': game.win_type, 'winner': game.winner.username}, room=room)
+        emit('finished', {'win_type': game.win_type, 'winner': game.winner.username, 'before1': game.p1.before, 'before2': game.p2.before,
+            'after1': game.p1.after,'after2': game.p2.after}, room=room)
         g = Games(player1=game.p1.username, player2=game.p2.username, moves=str(game.moves), winner=game.winner.username, 
                 before1=game.p1.before, before2=game.p2.before, after1=game.p1.after, after2=game.p2.after, played=date.today().strftime('%d/%m/%Y'))
         db.session.add(g)

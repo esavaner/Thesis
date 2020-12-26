@@ -4,6 +4,7 @@ import { Switch, Route, Redirect} from 'react-router-dom';
 import './Home.css';
 import '../../global.css';
 
+import Replay from '../game/Replay';
 import BotGame from '../game/BotGame';
 import Game from '../game/Game';
 import Room from '../room/Room';
@@ -27,6 +28,12 @@ class Home extends React.Component {
                 </Route>
                 <Route path='/h/b'>
                     <BotGame theme={this.props.theme}></BotGame>
+                </Route>
+                <Route path='/h/w/:game_id'>
+                    <Replay theme={this.props.theme}></Replay>
+                </Route>
+                <Route path='/h/w'>
+                    <Redirect to='/h'></Redirect>
                 </Route>
                 <Route path='/h/p/:user'>
                     <Profile theme={this.props.theme}></Profile>

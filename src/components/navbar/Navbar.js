@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Field(props) {
     let user = getUser();
-    if (user && user.username) 
+    if (user && user.username !== '') 
         return <UserField/>
 
     return <LoginField/>
