@@ -166,7 +166,7 @@ class ReplayWithParams extends React.Component {
                     <div className='player'> 
                         {this.state.color === 'white' ? this.state.playerB : this.state.playerW}
                     </div>
-                    <Board pick={this.pick} drop={this.drop} move={this.move} pX={0} pY={0}
+                    <Board pick={this.pick} drop={this.drop} move={this.move} pX={0} pY={0} checkers={[]}
                         theme={this.props.theme} grid={this.state.grid} picked={null} color={this.state.color}></Board>
                     <div className='player'>
                         {this.state.user.username || 'Anonymous'}

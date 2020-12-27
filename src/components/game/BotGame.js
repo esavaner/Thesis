@@ -181,7 +181,7 @@ class BotGame extends React.Component {
                         }
                         {this.state.difficulty ? diff[this.state.difficulty] + ' Bot' : 'Bot'}
                     </div>
-                    <Board pick={this.pick} drop={this.drop} move={this.move} pX={this.state.pX} pY={this.state.pY}
+                    <Board pick={this.pick} drop={this.drop} move={this.move} pX={this.state.pX} pY={this.state.pY} checkers={[]}
                         theme={this.props.theme} grid={this.state.grid} picked={this.state.picked} color={this.state.color}></Board>
                     <div className='player'>
                         {this.state.user.username || 'Anonymous'}
