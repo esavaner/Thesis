@@ -47,6 +47,7 @@ class GameWithParams extends React.Component {
             user: getUser(),
             playerW: 'Anonymous',
             playerB: 'Anonymous',
+            checkers: []
         }
         this.i = null;
     }
@@ -106,7 +107,12 @@ class GameWithParams extends React.Component {
             console.log(resp, 'moved');
             let board = resp.board.split(/\n/g).map(r => r.split(/ /g));
             console.log(board)
-            this.setState({ grid: board, turn: resp.turn, moves: resp.moves});
+            this.setState({ 
+                grid: board, 
+                turn: resp.turn, 
+                moves: resp.moves,
+                checkers: resp.checkers
+            });
         });
         socket.on('message', (resp) => {
             console.log(resp, 'message');
@@ -209,7 +215,7 @@ class GameWithParams extends React.Component {
                             {Math.floor((this.state.time2%(10*60*60))/(10*60))}m {Math.floor((this.state.time2%(10*60))/(10))}s {Math.floor(this.state.time2%10)}
                         </span>
                     </div>
-                    <Board pick={this.pick} drop={this.drop} move={this.move} pX={this.state.pX} pY={this.state.pY}
+                    <Board pick={this.pick} drop={this.drop} move={this.move} pX={this.state.pX} pY={this.state.pY} checkers={this.state.checkers}
                         theme={this.props.theme} grid={this.state.grid} picked={this.state.picked} color={this.state.color}></Board>
                     <div className={'timer '  +  (this.state.color === this.state.turn ? this.props.theme + '2 turn' : '')}>
                         <span>

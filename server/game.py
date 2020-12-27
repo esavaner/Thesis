@@ -28,7 +28,7 @@ class Game:
         self.win_type = None
 
     def show(self):
-        return {'board': str(self.board).replace('↵', '\n'), 'turn': self.turn, 'moves': self.moves }
+        return {'board': str(self.board).replace('↵', '\n'), 'turn': self.turn, 'moves': self.moves, 'checkers': [a for a in self.board.checkers()] }
 
     def makeMove(self, move):
         if self.started:

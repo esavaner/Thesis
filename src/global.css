@@ -56,6 +56,7 @@ a {
 .darkL { background-color: #bdbdca; color: black;}
 .darkD { background-color: #4a4a50; }
 .darkP { background-color: #377e37; }
+.darkC { background-color: #b63636; }
 
 
 
@@ -75,6 +76,7 @@ a {
 .lightL { background-color: #bec0c4; }
 .lightD { background-color: #525a6b; }
 .lightP { background-color: #377e37; }
+.lightC { background-color: #b63636; }
 
 
 ::-webkit-scrollbar {

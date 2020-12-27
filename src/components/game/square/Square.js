@@ -17,6 +17,9 @@ class Square extends React.Component {
             col = "P";
             styles = {pointerEvents: 'none', position: 'absolute', left: 0, top: 0, zIndex:2, transform: `translate(${this.props.pX}px, ${this.props.pY}px)`};
         }
+        if (this.props.checkers.includes(this.props.val)) {
+            col = "C";
+        }
         return (
             <div className={'sq ' + this.props.theme + col} onMouseDown={this.props.pick}>
                 <div className='num'>{this.props.val}</div>
