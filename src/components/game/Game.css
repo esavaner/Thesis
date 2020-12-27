@@ -40,7 +40,7 @@
 }
 
 .main .end .players {
-    width: 180;
+    width: 225px;
 }
 
 .main .end button {
@@ -49,7 +49,7 @@
 
 .main .end .players div {
     display: inline-block;
-    width: 60px;
+    width: 75px;
     text-align: center;
 }
 

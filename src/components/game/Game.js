@@ -165,8 +165,8 @@ class GameWithParams extends React.Component {
         let pl = null;
         let op = null;
         if (this.state.win_type === 'normal') {
-            if (this.state.winner === this.state.user.username) wt = 'Victory';
-            else wt = 'Defeat';
+            if (this.state.winner === this.state.user.username) wt = 'Victory!';
+            else wt = 'Defeat!';
             console.log(this.state)
             pl = this.state.user.username === this.state.playerW ? 1 : 2;
             op = this.state.user.username === this.state.playerW ? 2 : 1;
@@ -174,7 +174,7 @@ class GameWithParams extends React.Component {
             score1 = this.state['after'+pl] - this.state['before'+pl] > 0 ? <span className='won'>+{this.state['after'+pl] - this.state['before'+pl]}</span> : <span className='lost'>{this.state['after'+pl] - this.state['before'+pl]}</span>;
             score2 = this.state['after'+op] - this.state['before'+op] > 0 ? <span className='won'>+{this.state['after'+op] - this.state['before'+op]}</span> : <span className='lost'>{this.state['after'+op] - this.state['before'+op]}</span>;
         } else if (this.state.win_type === 'stalemate'){
-            wt = 'Stalemate';
+            wt = 'Stalemate!';
             pl = this.state.user.username === this.state.playerW ? 1 : 2;
             op = this.state.user.username === this.state.playerW ? 2 : 1;
             score1 = <>+0</>

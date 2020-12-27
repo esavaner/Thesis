@@ -38,7 +38,8 @@ class BotGame extends React.Component {
             finished: false,
             difficulty: null,
             thinking: false,
-            user: getUser() || 'Anonymous'
+            user: getUser() || 'Anonymous',
+            turn: null,
         }
     }
 
@@ -69,10 +70,12 @@ class BotGame extends React.Component {
         console.log(game.exportJson());
         if (game.exportJson().isFinished) {
             this.setState({
-                finished: true
+                finished: true,
+                thinking: false,
+                turn: game.exportJson().turn
             });
             console.log('finished');
-            console.log(game.exportJson().turn);
+            console.log(this.state);
         }
     }
 
@@ -166,6 +169,12 @@ class BotGame extends React.Component {
         return (
             <div className='game'>
                 <div className='main'>
+                    {this.state.finished &&
+                        <div className={this.props.theme + '2 end'}>
+                            <h1>{this.state.turn === 'white' ? 'Defeat!' : 'Victory!'}</h1>
+                            <Link to='/h'><button>Exit</button></Link>
+                        </div>
+                    }
                     <div className='player'> 
                         {this.state.thinking &&
                             <span className='loader'></span>
