@@ -8,6 +8,7 @@ from game import Game
 from random import choices, randint
 from datetime import date
 import string
+import math
 
 app = Flask(__name__)
 CORS(app)
@@ -21,10 +22,13 @@ app.host = 'localhost'
 db.init_app(app)
 with app.app_context():
     db.create_all()
-    for i in range(5):
-        u = Users(username=('user' + str(i)), password=sha256_crypt.hash('pass' + str(i)), email=('user' + str(i) + '@mail.com'), 
-            elo=randint(500, 1500), highest=randint(1500, 2000), won=randint(0, 100), lost=randint(0, 100), stalemate=randint(0, 100))
-        g = Games(player1=('user' + str(i)), player2=('user' + str(i+1)), moves=str(["h2h4","d7d5","g1f3","b8d7","f3e5","d7e5","f2f4","g8f6","h1h3","c8h3"]), winner=('user' + str(i)), 
+    for i in range(30):
+        w = randint(10, 100)
+        l = randint(10, 100)
+        e = math.floor(w/(w+l)*3000)
+        u = Users(username=('template_user' + str(i)), password=sha256_crypt.hash('pass' + str(i)), email=('user' + str(i) + '@mail.com'), 
+            elo=e, highest=e+randint(0, 200), won=w, lost=l, stalemate=randint(0, 100))
+        g = Games(player1=('template_user' + str(i)), player2=('template_user' + str(i+1)), moves=str(["h2h4","d7d5","g1f3","b8d7","f3e5","d7e5","f2f4","g8f6","h1h3","c8h3"]), winner=('template_user' + str(i)), 
                 before1=randint(500, 1500), before2=randint(500, 1500), after1=randint(500, 1500), after2=randint(500, 1500), played=date.today().strftime('%d/%m/%Y'))
         db.session.add(u)
         db.session.add(g)

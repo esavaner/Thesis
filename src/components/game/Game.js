@@ -194,7 +194,7 @@ class GameWithParams extends React.Component {
                             <h1>{wt}</h1>
                             <div className='players'>
                                 <div>{this.state.user.username || 'Anonymous'}</div>
-                                <div><small>vs</small></div>
+                                <small>vs</small>
                                 <div>{this.state.color === 'white' ? this.state.playerB : this.state.playerW}</div>
                             </div>
                             <div>
