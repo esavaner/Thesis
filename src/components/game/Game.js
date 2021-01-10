@@ -73,7 +73,6 @@ class GameWithParams extends React.Component {
         if (this.state.started && this.state.turn === this.state.color && e.target && e.target.alt) {
             socket.emit('move', {room: this.props.room, from: this.state.picked, to: e.target.alt, promo: ''})
         }
-        console.log(this.state.picked + ' ' + e.target.alt);
         this.setState({
             picked: null
         })
@@ -101,12 +100,9 @@ class GameWithParams extends React.Component {
             }
         });
         socket.on('left', (resp) => {
-            console.log(resp, 'left');
         });
         socket.on('moved', (resp) => {
-            console.log(resp, 'moved');
             let board = resp.board.split(/\n/g).map(r => r.split(/ /g));
-            console.log(board)
             this.setState({ 
                 grid: board, 
                 turn: resp.turn, 
@@ -115,10 +111,8 @@ class GameWithParams extends React.Component {
             });
         });
         socket.on('message', (resp) => {
-            console.log(resp, 'message');
         });
         socket.on('start', (resp) => {
-            console.log('Started');
             this.setState({
                 started: true,
                 playerW: resp.playerW || 'Anonymous', 
@@ -135,7 +129,6 @@ class GameWithParams extends React.Component {
             }, 100);
         });
         socket.on('finished', (resp) => {
-            console.log(resp, 'finished');
             this.setState({
                 finished: true,
                 win_type: resp.win_type,
@@ -173,10 +166,8 @@ class GameWithParams extends React.Component {
         if (this.state.win_type === 'normal') {
             if (this.state.winner === this.state.user.username) wt = 'Victory!';
             else wt = 'Defeat!';
-            console.log(this.state)
             pl = this.state.user.username === this.state.playerW ? 1 : 2;
             op = this.state.user.username === this.state.playerW ? 2 : 1;
-            console.log(pl, op)
             score1 = this.state['after'+pl] - this.state['before'+pl] > 0 ? <span className='won'>+{this.state['after'+pl] - this.state['before'+pl]}</span> : <span className='lost'>{this.state['after'+pl] - this.state['before'+pl]}</span>;
             score2 = this.state['after'+op] - this.state['before'+op] > 0 ? <span className='won'>+{this.state['after'+op] - this.state['before'+op]}</span> : <span className='lost'>{this.state['after'+op] - this.state['before'+op]}</span>;
         } else if (this.state.win_type === 'stalemate'){

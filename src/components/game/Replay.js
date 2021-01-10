@@ -43,15 +43,12 @@ class ReplayWithParams extends React.Component {
     }
 
     checkFinished = (game) => {
-        console.log(game.exportJson());
         if (game.exportJson().isFinished || this.state.curr_i === this.state.moves.length - 1) {
             this.setState({
                 finished: true,
                 playing: false,
                 time: 100
             });
-            console.log('finished');
-            console.log(game.exportJson().turn);
             clearInterval(this.i)
             clearInterval(this.t)
         }
@@ -133,7 +130,6 @@ class ReplayWithParams extends React.Component {
 
     componentDidMount() {
         game = new jsChessEngine.Game();
-        console.log(game)
         getGame(this.props.game_id).then(
             (g) => {
                 let col = this.state.user.username === g.player1 ? 'white' : 'black';

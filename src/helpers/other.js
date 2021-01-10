@@ -3,7 +3,6 @@ import API_URL from '../config'
 
 async function create() {
     let user = localStorage.getItem('user') ? localStorage.getItem('user') : {username: ''}
-    console.log(user)
     let options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

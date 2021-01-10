@@ -44,15 +44,12 @@ class BotGame extends React.Component {
     }
 
     start = (e) => {
-        console.log('Started');
         game = new jsChessEngine.Game();
         this.setState({
             started: true,
             turn: 'white',
             difficulty: e?.target?.value || 1
         });
-        console.log(game);
-        console.log(game.exportFEN())
     }
 
     pick = (e) => {
@@ -67,15 +64,12 @@ class BotGame extends React.Component {
     }
 
     checkFinished = (game) => {
-        console.log(game.exportJson());
         if (game.exportJson().isFinished) {
             this.setState({
                 finished: true,
                 thinking: false,
                 turn: game.exportJson().turn
             });
-            console.log('finished');
-            console.log(this.state);
         }
     }
 
@@ -109,7 +103,6 @@ class BotGame extends React.Component {
                 }, Math.floor(500/(this.state.difficulty+1)));
             } catch (e) {}
         }
-        console.log(this.state.picked + ' ' + e.target.alt);
         e.stopPropagation()
         e.preventDefault()
     }

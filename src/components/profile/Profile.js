@@ -25,7 +25,6 @@ class ProfileWithParams extends React.Component {
     componentDidMount() {
         getProfile(this.props.user).then(
             (resp) => {
-                console.log(resp)
                 this.setState({
                     username: resp.user.username,
                     elo: resp.user.elo,
