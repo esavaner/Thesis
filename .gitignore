@@ -28,4 +28,5 @@ server/base.db
 public
 
 .vscode
+.eslintcache
 package-lock.json
