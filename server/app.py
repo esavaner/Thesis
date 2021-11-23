@@ -106,6 +106,23 @@ def get_game():
     return jsonify(g.show()), 200
 
 
+@app.route('/room', methods=['POST'])
+def get_room():
+    print('Request room id', request)
+    room_id = request.json['room_id']
+    print(room_id)
+    if str(room_id).lower() in rooms:
+        return jsonify({'room_id': room_id}), 200 
+    else: 
+        return jsonify({}), 400
+
+
+@app.route('/', methods=['GET', 'POST', 'PUT', 'DELETE'])
+def get_base():
+    print('Base request')
+    return jsonify({'resp': 'ok'}), 200
+
+
 @app.route('/users', methods=['GET'])
 def get_users():
     print('Request users', request)

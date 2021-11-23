@@ -1,4 +1,4 @@
-import API_URL from '../config'
+import { API_URL } from '../config'
 
 
 async function register(user) {
@@ -55,6 +55,15 @@ async function getGame(id) {
     return fetch(`${API_URL}/game`, options).then((response) => response.json());
 }
 
+async function getRoom(id) {
+    let options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({room_id: id})
+    }
+    return fetch(`${API_URL}/room`, options).then((response) => response.json());
+}
+
 function logout() {
     localStorage.removeItem('user');
 }
@@ -70,5 +79,6 @@ export {
     getUser,
     getUsers,
     getGame,
+    getRoom,
     getProfile
 }

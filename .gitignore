@@ -29,4 +29,8 @@ public
 
 .vscode
 .eslintcache
+.firebase
 package-lock.json
+
+server/.venv
+server/.azure

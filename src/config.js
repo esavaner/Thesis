@@ -1,3 +1,7 @@
-const API_URL = 'http://localhost:5000';
+const API_URL = 'https://fr-chess-api.azurewebsites.net';
+const WEB_URL = 'https://fr-chess-st.web.app/';
 
-export default API_URL;
+export {
+    WEB_URL,
+    API_URL
+};

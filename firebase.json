@@ -1,6 +1,6 @@
 {
     "hosting": {
-        "site": "self-chess",
+        "site": "fr-chess-st",
         "public": "build",
         "ignore": [
             "firebase.json",
