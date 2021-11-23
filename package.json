@@ -13,7 +13,7 @@
     "bootstrap": "^4.6.1",
     "file-system": "^2.2.2",
     "glob": "^7.2.0",
-    "js-chess-engine": "^0.5.1",
+    "js-chess-engine": "^1.0.2",
     "list-react-files": "^0.2.0",
     "react": "^16.14.0",
     "react-bootstrap": "^1.6.4",
