@@ -96,6 +96,12 @@ class Ranking extends React.Component {
                         </table>
                     </div>
                 </div>
+                {this.state.users.length === 0 &&
+                        <div className='fetch'>
+                            <div className='loader'></div>
+                            <span>Loading users</span>
+                        </div>
+                    }
                 <ReactPaginate
                     previousLabel={'Previous'}
                     nextLabel={'Next'}
